@@ -20,6 +20,10 @@ Cada pasta dentro de `apps/` representa um microserviço ou aplicação isolada.
 
 ---
 
+## Arquitetura do Projeto
+
+![Arquitetura do Projeto](image.png)
+
 ## 📌 Tecnologias Utilizadas
 
 | Categoria                   | Ferramenta                 |
@@ -58,7 +62,7 @@ Execute na raiz do projeto:
 pnpm install
 ```
 
-Isso vai instalar todas as dependências e resolver workspaces. ([GitHub][1])
+Isso vai instalar todas as dependências e resolver workspaces.
 
 ---
 
@@ -96,7 +100,7 @@ DB_NAME=your_db_name
 
 A configuração pode variar por escopo (cada serviço pode ter seu próprio `.env`). — Certifique-se de que todos os serviços leiam as variáveis antes de inicializar.
 
----
+
 
 ## 📦 Scripts Disponíveis
 
@@ -114,7 +118,7 @@ pnpm turbo run dev
 
 O Turborepo executa os serviços conforme configuração no `turbo.json` (geralmente em paralelo com watch). ([GitHub][1])
 
----
+
 
 ## 🧩 Microserviços
 
@@ -142,7 +146,7 @@ O Turborepo executa os serviços conforme configuração no `turbo.json` (geralm
 * Persiste notificações no banco
 * Envia eventos via WebSocket para os clientes conectados
 
----
+
 
 ## 📄 Documentação de API
 
@@ -154,7 +158,7 @@ GET http://localhost:3000/api/docs
 
 Ele expõe todos os endpoints disponíveis com exemplos. Isso inclui payloads e respostas de cada rota.
 
----
+
 
 ## 🌐 WebSockets
 
@@ -166,7 +170,94 @@ ws://localhost:PORT/ws?email=usuario@example.com
 
 Clientes recebem eventos em tempo real conforme notificações são geradas.
 
----
+
+## Decisões técnicas
+
+### Porque utilizar `pnpm`?
+Por que utilizar pnpm em vez de npm neste projeto?
+
+Este projeto adota pnpm como gerenciador de pacotes por se tratar de um monorepo com múltiplos microserviços NestJS, compartilhando código, dependências e padrões arquiteturais.
+
+A escolha é baseada em desempenho, consistência, economia de espaço e segurança arquitetural.
+
+Entre outros motivos, o principal é:
+*Cada serviço usa NestJS compartilha DTOs, enums, utils depende de versões compatíveis das mesmas libs. O npm duplica dependências em cada node_modules, cresce rapidamente o tamanho do projeto e deixa o install lento e pesado, além disso ele permite dependências “fantasmas” (imports que não existem no package.json).*
+
+### Porque utilizar `pino`?
+Entre outros motivos:
+
+1) Baixa latência e baixo uso de CPU: O Pino tem um foco claro em garantir que o logging não afete a performance do sistema. Ele usa:
+- Streams assíncronos para reduzir o tempo de bloqueio;
+- Buffers internos para reduzir a sobrecarga de escrita no disco ou na rede.
+
+Isso significa que em ambientes de alta concorrência, como sistemas distribuídos ou com alto tráfego, o Pino não impacta o desempenho como outras bibliotecas de logging podem fazer.
+
+2) Integração fácil com NestJS: Pino integra-se perfeitamente ao NestJS. Em Nest, você pode facilmente criar um logger personalizado utilizando o nestjs-pino, um pacote que integra o Pino com a infraestrutura de logging do NestJS.
+
+### Porque utilizar `QueryBuilder`?
+1. find() é bom para casos simples. repository.find() funciona bem quando:
+
+- Filtros são estáticos
+- Não há combinações dinâmicas
+- Não há paginação complexa
+- Não há joins condicionais
+
+Em nosso cenário, temos tudo isso ao mesmo tempo:
+
+Filtros opcionais:
+- title
+- priority
+- status
+- Paginação
+- Ordenação
+- Join com comentários
+
+O que nos faz optarmos por QueryBuilder.
+
+2. Filtros dinâmicos (condicionais)
+
+```javascript
+if (title) {
+  qb.andWhere('LOWER(task.title) LIKE LOWER(:title)', {
+    title: `%${title}%`,
+  });
+}
+
+if (priority) {
+  qb.andWhere('task.priority = :priority', { priority });
+}
+
+if (status) {
+  qb.andWhere('task.status = :status', { status });
+}
+```
+
+Por que QueryBuilder é a escolha certa aqui:
+
+Com find() teriamos:
+- Um objeto where gigante
+- Condições espalhadas
+- Código difícil de manter
+
+Com QueryBuilder:
+
+- Cada filtro é opt-in
+- Código é legível
+- Fácil adicionar novos filtros no futuro
+
+## Tempo de desenvolvimento
+Dia 1: Entendendo conceitos teóricos do projeto
+Dia 2: Configurando ambiente + implementação do Api Gateway
+Dia 3: Implementação do Auth-Service
+Dia 4: Conclusão do Auth-Service
+Dia 5: Implementação do Tasks Service
+Dia 6: Implementação do Notifications Service
+Dia 7: Configuração + IMplementação do Web
+Dia 8: Integração do Web + Api Gateway
+Dia 9: Configuração do Web + Websocket
+Dia 10 - 12: Configurando Websocket do Web + Websocket do Notifications Service
+Dia 13: Documentando serviços 
+Dia 14: Refatorando o código + Readme.md final
 
 ## 💡 Recomendações para Desenvolvimento
 
@@ -175,7 +266,6 @@ Clientes recebem eventos em tempo real conforme notificações são geradas.
 * Atualize o branch `dev` antes de realizar pull requests
 * Teste fluxos importantes com dados reais
 
----
 
 ## 🧩 Boas práticas de Git
 
@@ -183,9 +273,6 @@ Clientes recebem eventos em tempo real conforme notificações são geradas.
 * Faça PRs para `dev` antes de mesclar em `main`
 * Mantenha a branch `dev` sempre estável
 
-Essa é uma prática comum usada em workflows com GitHub e equipes colaborativas. ([HackMD][2])
-
----
 
 ## 🤝 Contribuição
 
@@ -195,17 +282,8 @@ Se quiser contribuir:
 2. Faça commits claros e atômicos
 3. Abra um pull request para a branch `dev` com descrição do que foi feito
 
----
-
-## 📜 Licença
-
-Licença não especificada no repositório (adapte se houver).
-
----
 
 ## 📝 Contato
-
-Manter atualizado com:
 
 ```
 Leonardobern10 — https://github.com/Leonardobern10
