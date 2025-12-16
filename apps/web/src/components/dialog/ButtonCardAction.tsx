@@ -14,7 +14,7 @@ export default function ButtonCardAction({
       onClick={onClick}
       size={size}
       variant={variant}
-      className={` ${fontSize} text-gray-600 border-2 sm:text-sm max-w-120 font-medium px-1 sm:px-5 py-0.5 sm:py-1 ${
+      className={` ${fontSize} cursor-pointer text-gray-600 border-2 sm:text-sm max-w-120 font-medium px-1 sm:px-5 py-0.5 sm:py-1 ${
         full ? "w-full md:w-1/3" : "w-fit"
       }`}
     >

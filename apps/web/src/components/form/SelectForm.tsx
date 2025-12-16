@@ -13,11 +13,11 @@ import type { SelectType } from "@/types/SelectStatusType";
 import type { SelectFormProps } from "@/types/props/SelectFormProps";
 
 export default function SelectForm<
-  T extends StatusTaskType | PriorityTaskType
+  T extends StatusTaskType | PriorityTaskType,
 >({ placeholder, label, values, value, onValueChange }: SelectFormProps<T>) {
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-45">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

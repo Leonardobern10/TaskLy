@@ -27,7 +27,7 @@ export function DatePickerForm({
           <Button
             variant="outline"
             id="date"
-            className="w-48 justify-between font-normal"
+            className="w-48 justify-between font-normal cursor-pointer"
           >
             {selectedDate
               ? selectedDate.toLocaleDateString("pt-BR")

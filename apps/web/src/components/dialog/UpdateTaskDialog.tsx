@@ -48,7 +48,7 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
           <p>{updateTaskDialogData.buttonEdit}</p>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-125">
         <DialogHeader>
           <DialogTitle>{updateTaskDialogData.dialogTitle}</DialogTitle>
           <DialogDescription>
@@ -129,7 +129,11 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
 
           <DialogFooter className="mt-4">
             <DialogClose asChild>
-              <Button variant="outline" onClick={() => reset()}>
+              <Button
+                className="cursor-pointer"
+                variant="outline"
+                onClick={() => reset()}
+              >
                 {updateTaskDialogData.buttonCancel}
               </Button>
             </DialogClose>

@@ -33,7 +33,7 @@ export default function CreateCommentDialog({ id }: { id: string }) {
           <LuPlus />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] max-h-screen">
+      <DialogContent className="sm:max-w-106.25 max-h-screen">
         <form>
           <DialogHeader>
             <DialogTitle>{dialogTitleText}</DialogTitle>
@@ -59,7 +59,9 @@ export default function CreateCommentDialog({ id }: { id: string }) {
               {dialogCloseText}
             </Button>
           </DialogClose>
-          <Button onClick={handleSubmit(onSubmit)}>{buttonSaveText}</Button>
+          <Button className="cursor-pointer" onClick={handleSubmit(onSubmit)}>
+            {buttonSaveText}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -42,7 +42,7 @@ export default function NewTaskDialog() {
             </span>
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] max-h-screen overflow-y-scroll">
+        <DialogContent className="sm:max-w-106.25 max-h-screen overflow-y-scroll">
           <DialogHeader>
             <DialogTitle>{newTaskDialogData.dialogTitle}</DialogTitle>
             <DialogDescription>
@@ -114,7 +114,11 @@ export default function NewTaskDialog() {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline" onClick={() => reset()}>
+              <Button
+                className="cursor-pointer"
+                variant="outline"
+                onClick={() => reset()}
+              >
                 {newTaskDialogData.buttonCancel}
               </Button>
             </DialogClose>

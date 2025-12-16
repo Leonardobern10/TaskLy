@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter", "sans-serif"], // substituindo a fonte padrão
-        inter: ["Inter", "sans-serif"],
+        mono: ["Open Sans", "sans-serif"],
       },
     },
   },

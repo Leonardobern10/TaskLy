@@ -62,7 +62,7 @@ export default function Login() {
             variant="default"
             size="lg"
             disabled={Object.keys(errors).length > 0}
-            className="w-full mt-2"
+            className="w-full mt-2 cursor-pointer"
           >
             Entrar
           </Button>
