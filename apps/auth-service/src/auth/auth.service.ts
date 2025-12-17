@@ -107,9 +107,16 @@ export class AuthService {
    * @throws {UnauthorizedException} Se o refresh token for inválido ou expirado.
    */
   async refresh(data: { refresh_token: string }): Promise<ResponseAuthRefresh> {
-    const rt = data.refresh_token;
     this.logger.log(`Iniciando processo de refreshToken...`);
     try {
+      if (!data.refresh_token) {
+        throw new RpcException({
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: 'Token não encontrado!',
+          errorName: 'Invalid credentials',
+        });
+      }
+      const rt = data.refresh_token;
       const decoded = this.jwtService.verify(rt, {
         secret: this.refreshSecret,
       });
@@ -118,13 +125,21 @@ export class AuthService {
 
       if (!user || !user.refreshToken) {
         this.logger.warn('Falha na atualização do token');
-        throw new UnauthorizedException('Refresh token inválido');
+        throw new RpcException({
+          statusCode: HttpStatus.UNAUTHORIZED,
+          message: 'Credenciais inválidas!',
+          errorName: 'Credenciais inválidas',
+        });
       }
 
       const valid = await bcrypt.compare(rt, user.refreshToken);
       if (!valid) {
         this.logger.warn('Falha de atualização de token');
-        throw new UnauthorizedException('Refresh token inválido');
+        throw new RpcException({
+          statusCode: HttpStatus.UNAUTHORIZED,
+          message: 'Credenciais inválidas!',
+          errorName: 'Credenciais inválidas',
+        });
       }
 
       const payload = { sub: user.id, email: user.email };
@@ -146,7 +161,11 @@ export class AuthService {
       return { access_token: newAccessToken, refresh_token: newRefreshToken };
     } catch (error) {
       this.logger.error('Erro ao atualizar refresh token: ', error);
-      throw new UnauthorizedException('Refresh token expired or invalid');
+      throw new RpcException({
+        statusCode: HttpStatus.UNAUTHORIZED,
+        message: 'Credenciais inválidas!',
+        errorName: 'Credenciais inválidas',
+      });
     }
   }
 

@@ -120,7 +120,6 @@ export class AuthController implements InterfaceAuthController {
   @ApiBadRequestResponse({ description: 'Validation failed' })
   @ApiInternalServerErrorResponse({ description: 'Unexpected error' })
   async register(@Body() dto: RegisterDto): Promise<UserEntity> {
-    this.logger.log(dto);
     return await lastValueFrom(this.authService.send('auth.register', dto));
   }
 
@@ -171,17 +170,11 @@ export class AuthController implements InterfaceAuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<ResponseRefresh | Response> {
     const token = req.cookies?.refresh_token;
-    if (!token) throw new BadRequestException('Refresh token missing');
-    try {
-      const result = await lastValueFrom(
-        this.authService.send('auth.refresh', { refresh_token: token }),
-      );
-      if (result.refresh_token) setRefreshCookie(res, result.refresh_token);
-      return { access_token: result.access_token };
-    } catch (error) {
-      this.logger.error(error, 'Refresh failed');
-      throw new BadRequestException('Invalid refresh token');
-    }
+    const result = await lastValueFrom(
+      this.authService.send('auth.refresh', { refresh_token: token }),
+    );
+    if (result.refresh_token) setRefreshCookie(res, result.refresh_token);
+    return { access_token: result.access_token };
   }
 
   /**
@@ -205,14 +198,9 @@ export class AuthController implements InterfaceAuthController {
     @Res({ passthrough: true }) res: Response,
   ): Promise<ResponseLogout> {
     clearRefreshCookie(res);
-    try {
-      return await lastValueFrom(
-        this.authService.send('auth.logout', req.user.id),
-      );
-    } catch (error) {
-      this.logger.error(error, 'Logout failed');
-      throw new InternalServerErrorException('Logout error');
-    }
+    return await lastValueFrom(
+      this.authService.send('auth.logout', req.user.id),
+    );
   }
 
   /**
