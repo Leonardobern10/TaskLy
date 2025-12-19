@@ -21,6 +21,7 @@ export const fetchTasks = async (
       status: params.status,
       priority: params.priority,
       title: params.title,
+      order: params.order,
     },
   });
 

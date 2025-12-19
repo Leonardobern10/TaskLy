@@ -1,5 +1,6 @@
 import { TaskPriority } from 'src/tasks/entities/enum/taskPriority.enum';
 import { TaskStatus } from 'src/tasks/entities/enum/taskStatus.enum';
+import { OrderParams } from 'types/OrderParams';
 
 /**
  * DTO responsável por transportar informações de paginação
@@ -39,4 +40,9 @@ export class PaginationDto {
    * Filtro por título (busca parcial).
    */
   title?: string;
+
+  /**
+   * Parâmetro de ordenação
+   */
+  order?: OrderParams;
 }

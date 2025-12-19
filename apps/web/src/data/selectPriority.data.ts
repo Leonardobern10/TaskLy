@@ -1,3 +1,4 @@
+import { OrderParams } from "@/types/OrderOptionsEnum";
 import { PriorityTaskType } from "@/types/PriorityTaskType";
 import type { SelectType } from "@/types/SelectStatusType";
 
@@ -13,4 +14,10 @@ export const priorityOptions: SelectType<PriorityTaskType>[] = [
   { name: "Média", value: PriorityTaskType.MEDIUM },
   { name: "Alta", value: PriorityTaskType.HIGH },
   { name: "Urgente", value: PriorityTaskType.URGENT },
+];
+
+export const orderOptions: SelectType<OrderParams>[] = [
+  { name: "Criado em", value: OrderParams.CREATED },
+  { name: "Atualizado em", value: OrderParams.UPDATED },
+  { name: "Prazo", value: OrderParams.PRIZE },
 ];

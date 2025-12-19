@@ -34,6 +34,8 @@ import { TaskPriority } from 'src/entities/enum/TaskPriority';
 import { TaskStatus } from 'src/entities/enum/TaskStatus';
 import { IntefaceTasksController } from 'src/interfaces/InterfaceTasksController';
 import { JwtAuthGuard } from 'src/jwt/jwt.guard';
+import { FindTasksQueryDto } from 'src/types/FindTasksQueryDTO';
+import { OrderParams } from 'src/types/OrderParams';
 
 /**
  * Controller responsável por gerenciar tarefas e seus comentários.
@@ -126,35 +128,8 @@ export class TasksController implements IntefaceTasksController {
       },
     },
   })
-  async findAll(
-    @Query('page') page: string,
-    @Query('limit') limit: string,
-    @Query('priority') priority?: TaskPriority,
-    @Query('status') status?: TaskStatus,
-    @Query('title') title?: string,
-  ) {
-    if (title) {
-      return lastValueFrom(
-        this.taskService.send('tasks.title', { page, limit, title }),
-      );
-    }
-
-    if (status) {
-      this.logger.debug('Status recebido: ', status);
-      return lastValueFrom(
-        this.taskService.send('tasks.status', { page, limit, status }),
-      );
-    }
-
-    if (priority) {
-      return lastValueFrom(
-        this.taskService.send('tasks.priority', { page, limit, priority }),
-      );
-    }
-
-    return lastValueFrom(
-      this.taskService.send('tasks.findAll', { page, limit }),
-    );
+  async findAll(@Query() query: FindTasksQueryDto) {
+    return lastValueFrom(this.taskService.send('tasks.findAll', query));
   }
 
   /**

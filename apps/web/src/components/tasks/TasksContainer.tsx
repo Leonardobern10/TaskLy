@@ -8,33 +8,29 @@ import { useEffect } from "react";
 import { useRouter } from "@tanstack/react-router";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useForm } from "react-hook-form";
-import { StatusTaskType } from "@/types/StatusTaskType";
-import { PriorityTaskType } from "@/types/PriorityTaskType";
 import { ControllerSelect } from "../form/ControllerSelectForm";
 import { Separator } from "@radix-ui/react-separator";
 import ButtonCardAction from "../dialog/ButtonCardAction";
 import { statusOptions } from "@/data/selectStatus.data";
-import { priorityOptions } from "@/data/selectPriority.data";
+import { orderOptions, priorityOptions } from "@/data/selectPriority.data";
+import { OrderParams } from "@/types/OrderOptionsEnum";
+import type { FilterFormValues } from "@/types/FilterFormValues";
 
-interface FilterFormValues {
-  status: StatusTaskType | "";
-  priority: PriorityTaskType | "";
-}
-
-export default function TasksContainer({
-  searchTitle,
-}: {
+type SearchTitle = {
   searchTitle: string;
-}) {
+};
+
+export default function TasksContainer({ searchTitle }: SearchTitle) {
   const { tasks, loading, setFilters } = useTasksContainer();
   const { isLogged } = useAuthStore();
   const router = useRouter();
   const { control, watch, reset } = useForm<FilterFormValues>({
-    defaultValues: { status: "", priority: "" },
+    defaultValues: { status: "", priority: "", order: OrderParams.CREATED },
   });
 
   const selectedStatus = watch("status");
   const selectedPriority = watch("priority");
+  const selectedOrder = watch("order");
 
   const notAccess = () => {
     if (!isLogged) router.navigate({ from: "/auth/login" });
@@ -48,10 +44,11 @@ export default function TasksContainer({
         title: searchTitle.trim() || undefined,
         status: selectedStatus || undefined,
         priority: selectedPriority || undefined,
+        order: selectedOrder || undefined,
       });
     }, 400);
     return () => clearTimeout(delay);
-  }, [searchTitle, selectedStatus, selectedPriority]);
+  }, [searchTitle, selectedStatus, selectedPriority, selectedOrder]);
 
   const handleReset = () => {
     reset({ status: "", priority: "" });
@@ -72,7 +69,7 @@ export default function TasksContainer({
           />
 
           {/* Selects */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <ControllerSelect
               name="status"
               control={control}
@@ -86,6 +83,13 @@ export default function TasksContainer({
               label="Prioridade"
               placeholder="Selecione a prioridade"
               values={priorityOptions}
+            />
+            <ControllerSelect
+              name="order"
+              control={control}
+              label="Ordenar por"
+              placeholder="Ordenar"
+              values={orderOptions}
             />
           </div>
         </div>

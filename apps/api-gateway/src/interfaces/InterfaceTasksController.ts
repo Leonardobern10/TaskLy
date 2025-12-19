@@ -6,6 +6,7 @@ import { UpdateTaskDto } from 'src/entities/dto/UpdateTaskDto.dto';
 import { TaskPriority } from 'src/entities/enum/TaskPriority';
 import { TaskStatus } from 'src/entities/enum/TaskStatus';
 import { Task } from 'src/entities/Task';
+import { FindTasksQueryDto } from 'src/types/FindTasksQueryDTO';
 import { ResponseTasksFindAll } from 'src/types/ReturnTasksGateway';
 
 /**
@@ -29,13 +30,7 @@ export interface IntefaceTasksController {
    * @param {string} [title] - Filtro por título da tarefa.
    * @returns {Promise<ResponseTasksFindAll>} Retorna objeto com tarefas paginadas.
    */
-  findAll(
-    page: string,
-    limit: string,
-    priority?: TaskPriority,
-    status?: TaskStatus,
-    title?: string,
-  ): Promise<ResponseTasksFindAll>;
+  findAll(query: FindTasksQueryDto): Promise<ResponseTasksFindAll>;
 
   /**
    * Retorna uma tarefa específica pelo seu ID.
