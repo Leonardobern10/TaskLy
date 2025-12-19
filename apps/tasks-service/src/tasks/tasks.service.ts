@@ -10,6 +10,7 @@ import CreateResponse from 'src/utils/response.utils';
 import { PaginationDto } from 'src/utils/pagination.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { ResponsePaginatedDto } from 'src/utils/response-paginated.dto';
+import { OrderParams } from 'types/OrderParams';
 
 /**
  * Serviço responsável pelas regras de negócio relacionadas às Tasks.
@@ -70,7 +71,7 @@ export class TasksService {
    * @returns Lista paginada de tasks
    */
   async findAll(pagination: PaginationDto) {
-    const { page, limit, title, priority, status } = pagination;
+    const { page, limit, title, priority, status, order } = pagination;
 
     const qb = this.taskRepo
       .createQueryBuilder('task')
@@ -90,9 +91,11 @@ export class TasksService {
       qb.andWhere('task.status = :status', { status });
     }
 
-    qb.skip((Number(page) - 1) * Number(limit))
-      .take(Number(limit))
-      .orderBy('task.createdAt', 'DESC');
+    qb.skip((Number(page) - 1) * Number(limit)).take(Number(limit));
+
+    // Novo trecho para ordenação
+    let selectedOrder: OrderParams = order || OrderParams.CREATED;
+    qb.orderBy(`task.${selectedOrder}`, 'DESC');
 
     const [data, totalItems] = await qb.getManyAndCount();
 
