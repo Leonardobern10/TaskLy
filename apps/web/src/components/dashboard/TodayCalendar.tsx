@@ -1,4 +1,4 @@
-import { Calendar } from "./ui/calendar";
+import { Calendar } from "../ui/calendar";
 
 export default function TodayCalendar() {
   const today = new Date();

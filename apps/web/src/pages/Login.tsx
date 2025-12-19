@@ -8,8 +8,8 @@ export default function Login() {
   const { handleSubmit, control, errors, onSubmit } = useLogin();
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-muted/40 px-4">
-      <div className="w-full max-w-md bg-card shadow-sm rounded-xl p-8 border">
+    <div className="container-auth">
+      <div className="body-auth">
         {/* Header */}
         <HeaderSection
           title="Entrar"
@@ -18,10 +18,7 @@ export default function Login() {
         />
 
         {/* Form */}
-        <form
-          className="flex flex-col gap-6 mt-6"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="form-auth" onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
           <Controller
             name="email"

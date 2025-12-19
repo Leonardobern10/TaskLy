@@ -35,9 +35,9 @@ export default function NewTaskDialog() {
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button variant="outline" className="bg-primary text-secondary gap-1">
+          <Button variant="default">
             <LuPlus className="size-4" />
-            <span className="text-xs font-medium tracking-wider">
+            <span className="text-sm font-medium">
               {newTaskDialogData.buttonNewTask}
             </span>
           </Button>
