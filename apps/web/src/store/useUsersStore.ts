@@ -14,9 +14,11 @@ interface UsersStore {
   getUsers: () => Promise<void>;
 }
 
-export const useUsersStore = create<UsersStore>((set) => ({
+export const useUsersStore = create<UsersStore>((set, get) => ({
   users: [],
   getUsers: async () => {
+    if (get().users.length > 0) return;
+
     const users = await getAllUsers();
     set({ users });
   },

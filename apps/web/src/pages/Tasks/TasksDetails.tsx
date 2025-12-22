@@ -11,20 +11,14 @@ import {
 import { Separator } from "@/components/ui/separator";
 import UpdateTaskDialog from "@/components/dialog/UpdateTaskDialog";
 import { TaskDetailsRoute } from "@/routes/tasks/tasks.$id";
-import { chooseColor } from "@/utils/getPriorityColor";
 import { useParams } from "@tanstack/react-router";
 import CreateCommentDialog from "@/components/dialog/CreateCommentDialog";
 import { useTasksDetails } from "@/hooks/useTasksDetails";
 import CommentsComponent from "@/components/comments/CommentsComponent";
-import { useMemo } from "react";
 
 export default function TaskDetails() {
   const { id } = useParams({ from: TaskDetailsRoute.id });
-  const { taskById, loading } = useTasksDetails(id);
-  const color = useMemo(() => {
-    if (!taskById) return null;
-    return chooseColor(taskById.priority);
-  }, [taskById?.priority]);
+  const { taskById, loading, color } = useTasksDetails(id);
 
   return (
     <div className="w-full flex justify-center py-8 px-4 bg-muted/40">

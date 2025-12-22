@@ -3,24 +3,11 @@ import TasksContainer from "@/components/tasks/TasksContainer";
 import TodayCalendar from "@/components/dashboard/TodayCalendar";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useState } from "react";
 import Clock from "@/components/dashboard/Clock";
+import { useDashboard } from "@/hooks/useDashboard";
 
 export default function Dashboard() {
-  const [searchTitle, setSearchTitle] = useState("");
-
-  const today = new Date();
-
-  const formattedDay = today.toLocaleDateString("pt-BR", {
-    weekday: "long",
-  });
-
-  const formattedDate = today.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-
+  const { formattedDate, formattedDay, searchTitle, onChange } = useDashboard();
   return (
     <div className="min-h-screen bg-muted/40 px-4 py-8">
       <div className="mx-auto max-w-6xl space-y-8">
@@ -45,7 +32,7 @@ export default function Dashboard() {
               placeholder="Pesquisar tarefa..."
               className="pl-10"
               value={searchTitle}
-              onChange={(e) => setSearchTitle(e.target.value)}
+              onChange={onChange}
             />
           </div>
         </section>

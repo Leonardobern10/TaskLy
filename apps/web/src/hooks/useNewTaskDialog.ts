@@ -3,9 +3,11 @@ import {
   type CreateTaskSchemaType,
 } from "@/schema/CreateTaskSchema";
 import { saveTask } from "@/services/tasksService";
+import { useUsersStore } from "@/store/useUsersStore";
 import { PriorityTaskType } from "@/types/PriorityTaskType";
 import { StatusTaskType } from "@/types/StatusTaskType";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -26,6 +28,7 @@ export const useNewTaskDialog = () => {
     },
     resolver: zodResolver(CreateTaskSchema),
   });
+  const { users, getUsers } = useUsersStore();
 
   const onSubmit: SubmitHandler<CreateTaskSchemaType> = async (
     data: CreateTaskSchemaType
@@ -35,5 +38,9 @@ export const useNewTaskDialog = () => {
     toast.success("Tarefa adicionada com sucesso!");
   };
 
-  return { handleSubmit, onSubmit, control, errors, reset };
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  return { handleSubmit, onSubmit, control, errors, reset, users };
 };

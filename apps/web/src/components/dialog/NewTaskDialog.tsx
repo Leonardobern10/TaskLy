@@ -18,18 +18,12 @@ import { selectPriorityData } from "@/data/selectPriority.data";
 import { LuPlus } from "react-icons/lu";
 import { ControllerDatePicker } from "../form/ControllerDatePicker";
 import { useNewTaskDialog } from "@/hooks/useNewTaskDialog";
-import { useUsersStore } from "@/store/useUsersStore";
-import { useEffect } from "react";
 import { ControllerMultiSelect } from "../form/ControllerMultiSelect";
 import { newTaskDialogData } from "@/data/newTaskDialog.data";
 
 export default function NewTaskDialog() {
-  const { handleSubmit, control, reset, errors, onSubmit } = useNewTaskDialog();
-  const { users, getUsers } = useUsersStore();
-
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const { handleSubmit, control, reset, errors, onSubmit, users } =
+    useNewTaskDialog();
 
   return (
     <Dialog>

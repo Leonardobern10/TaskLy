@@ -20,24 +20,11 @@ import { FaRegEdit } from "react-icons/fa";
 import { useUpdateTaskDialog } from "@/hooks/useUpdateTaskDialog";
 import type { TaskItem } from "@/types/TaskItem";
 import { ControllerMultiSelect } from "../form/ControllerMultiSelect";
-import { useAuthStore } from "@/store/useAuthStore";
-import { useRouter } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { useUsersStore } from "@/store/useUsersStore";
 import { updateTaskDialogData } from "@/data/updateTaskDialog.data";
 
 export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
-  const { handleSubmit, control, onSubmit, errors, reset } =
+  const { handleSubmit, control, onSubmit, errors, reset, users } =
     useUpdateTaskDialog(task);
-  const { isLogged } = useAuthStore();
-  const { users } = useUsersStore();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLogged) {
-      router.navigate({ from: "/auth/login" });
-    }
-  }, [isLogged]);
 
   return (
     <Dialog>

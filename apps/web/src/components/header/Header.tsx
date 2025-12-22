@@ -1,16 +1,10 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import NavBarListItem from "./NavBarListItem";
-import { useAuthStore } from "@/store/useAuthStore";
 import { Button } from "../ui/button";
+import { useHeader } from "@/hooks/useHeader";
 
 export default function Header() {
-  const { navigate } = useRouter();
-  const { isLogged, logout } = useAuthStore();
-
-  const handleLogout = async () => {
-    logout();
-    navigate({ from: "/auth/login" });
-  };
+  const { handleLogout, isLogged } = useHeader();
   return (
     <header className="w-full flex justify-between items-center px-6 md:px-40 py-4 bg-foreground/80">
       <p className="text-xl text-secondary w-fit">

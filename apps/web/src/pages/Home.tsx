@@ -1,15 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { useAuthStore } from "@/store/useAuthStore";
-import { Link, useRouter } from "@tanstack/react-router";
+import { useHome } from "@/hooks/useHome";
+
+import { Link } from "@tanstack/react-router";
 
 export default function Home() {
-  const { isLogged, logout } = useAuthStore();
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    logout();
-    router.navigate({ from: "/auth/login" });
-  };
+  const { isLogged, handleLogout } = useHome();
 
   return (
     <div className="h-full md:h-full flex flex-col items-center justify-center bg-gray-50 px-4 py-12">
