@@ -17,6 +17,8 @@ export class NotificationsGateway
   @WebSocketServer()
   server: Server;
 
+  private clients = new Map<string, WebSocket>();
+
   /**
    * Método chamado quando um cliente se conecta.
    * @param {WebSocket} client - Cliente que se conectou.
@@ -29,14 +31,24 @@ export class NotificationsGateway
       client.close();
       return;
     }
+
+    const existing = this.clients.get(email);
+    if (existing && existing.readyState === WebSocket.OPEN) {
+      existing.close();
+    }
+
     (client as any).email = email;
+    this.clients.set(email, client);
   }
 
   /**
    * Método chamado quando um cliente se desconecta.
    */
-  handleDisconnect() {
-    console.log('Cliente desconectado!');
+  handleDisconnect(client: WebSocket) {
+    const email = (client as any).email;
+    if (email) {
+      this.clients.delete(email);
+    }
   }
 
   /**
@@ -61,11 +73,10 @@ export class NotificationsGateway
    */
   broadcastToClient(event: string, data: any, recipients: string[]) {
     const payload = JSON.stringify({ type: event, payload: data });
-    this.server.clients.forEach((client: any) => {
-      if (
-        client.readyState === WebSocket.OPEN &&
-        recipients.includes(client.email)
-      ) {
+
+    recipients.forEach((email) => {
+      const client = this.clients.get(email);
+      if (client?.readyState === WebSocket.OPEN) {
         client.send(payload);
       }
     });
