@@ -34,7 +34,6 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(users);
     if (!isLogged) {
       router.navigate({ from: "/auth/login" });
     }

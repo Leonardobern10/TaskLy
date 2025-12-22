@@ -6,8 +6,8 @@ import { router } from "./routes/main.tsx";
 import { Toaster } from "./components/ui/sonner.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  <>
     <RouterProvider router={router} />
     <Toaster />
-  </StrictMode>
+  </>
 );

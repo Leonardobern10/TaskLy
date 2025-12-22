@@ -27,6 +27,7 @@ export const useUpdateTaskDialog = (task: TaskItem) => {
   });
 
   const onSubmit: SubmitHandler<UpdateTaskSchemaType> = async (data) => {
+    console.log("Dados atualizados: ", data);
     await updateTaskById(task.id, data);
     reset();
     toast.success("Tarefa atualizada com sucesso!");

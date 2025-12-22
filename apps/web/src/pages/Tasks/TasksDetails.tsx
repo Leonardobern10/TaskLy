@@ -26,8 +26,6 @@ export default function TaskDetails() {
     return chooseColor(taskById.priority);
   }, [taskById?.priority]);
 
-  console.log(taskById?.comments);
-
   return (
     <div className="w-full flex justify-center py-8 px-4 bg-muted/40">
       <div className="w-full max-w-4xl">

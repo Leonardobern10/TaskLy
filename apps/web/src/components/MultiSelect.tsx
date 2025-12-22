@@ -40,6 +40,7 @@ export function MultiSelect({
     } else {
       onChange([...value, item]);
     }
+    console.log(value);
   };
 
   return (
@@ -48,12 +49,12 @@ export function MultiSelect({
         <Button variant="outline" className="w-full justify-between">
           {value.length > 0
             ? `${value.length} selecionado(s)`
-            : placeholder ?? "Selecionar"}
+            : (placeholder ?? "Selecionar")}
           <ChevronsUpDown className="w-4 h-4 opacity-50" />
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="p-0 w-[300px]">
+      <PopoverContent className="p-0 w-75">
         <Command>
           <CommandList>
             <CommandEmpty>Nenhum resultado.</CommandEmpty>
