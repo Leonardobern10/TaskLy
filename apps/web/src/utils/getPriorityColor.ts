@@ -1,6 +1,7 @@
+import type { ColorFormat } from "@/types/ColorFormat";
 import { PriorityTaskType } from "@/types/PriorityTaskType";
 
-export const chooseColor = (priority: PriorityTaskType) => {
+export const chooseColor = (priority: PriorityTaskType): ColorFormat => {
   switch (priority) {
     case PriorityTaskType.URGENT:
       return {

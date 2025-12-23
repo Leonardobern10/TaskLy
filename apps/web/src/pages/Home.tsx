@@ -1,65 +1,49 @@
-import { Button } from "@/components/ui/button";
+import ButtonGroupLogged from "@/components/home/ButtonGroupLogged";
+import ButtonGroupUnLogged from "@/components/home/ButtonGroupUnLogged";
+import CardHomePage from "@/components/home/CardHomepage";
+import { cardHomepageData, homepageHeading } from "@/data/homepage.data";
 import { useHome } from "@/hooks/useHome";
+import type { CardHomepage } from "@/types/CardHomepageType";
 
-import { Link } from "@tanstack/react-router";
+const styles = {
+  homeContainer:
+    "h-full md:h-full flex flex-col items-center justify-center bg-gray-50 px-4 py-12",
+  bodyContainer: "max-w-2xl text-center space-y-6",
+  descriptionHomepage: "text-lg text-gray-600",
+  containerButtons:
+    "flex flex-col sm:flex-row gap-4 items-center justify-center mt-6",
+  containerCards:
+    "mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 place-items-center",
+};
 
 export default function Home() {
   const { isLogged, handleLogout } = useHome();
 
   return (
-    <div className="h-full md:h-full flex flex-col items-center justify-center bg-gray-50 px-4 py-12">
-      <div className="max-w-2xl text-center space-y-6">
-        <h1>Sistema de Gestão de Tarefas</h1>
+    <div className={styles.homeContainer}>
+      <div className={styles.bodyContainer}>
+        <h1>{homepageHeading.title}</h1>
 
-        <p className="text-lg text-gray-600">
-          Organize suas tarefas, acompanhe seu progresso e aumente sua
-          produtividade.
+        <p className={styles.descriptionHomepage}>
+          {homepageHeading.description}
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mt-6">
+        <div className={styles.containerButtons}>
           {isLogged ? (
-            <>
-              <Button asChild size="lg" variant="default">
-                <Link to="/tasks">Acessar Tarefas</Link>
-              </Button>
-              <Button variant="outline" size="lg" onClick={handleLogout}>
-                Sair
-              </Button>
-            </>
+            <ButtonGroupLogged handleLogout={handleLogout} />
           ) : (
-            <>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/auth/login">Login</Link>
-              </Button>
-
-              <Button asChild variant="outline" size="lg">
-                <Link to="/auth/register">Criar Conta</Link>
-              </Button>
-            </>
+            <ButtonGroupUnLogged />
           )}
         </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 place-items-center">
-          <div className="card-homepage">
-            <h3 className="font-semibold text-lg">Organização</h3>
-            <p className="text-sm text-gray-500 mt-2">
-              Categorize e priorize suas tarefas facilmente.
-            </p>
-          </div>
-
-          <div className="card-homepage">
-            <h3 className="font-semibold text-lg">Produtividade</h3>
-            <p className="text-sm text-gray-500 mt-2">
-              Acompanhe seu progresso e mantenha o foco.
-            </p>
-          </div>
-
-          <div className="card-homepage">
-            <h3 className="font-semibold text-lg">Simplicidade</h3>
-            <p className="text-sm text-gray-500 mt-2">
-              Interface moderna e fácil de usar no dia a dia.
-            </p>
-          </div>
+        <div className={styles.containerCards}>
+          {cardHomepageData.map((el: CardHomepage) => (
+            <CardHomePage
+              key={el.title}
+              title={el.title}
+              description={el.description}
+            />
+          ))}
         </div>
       </div>
     </div>

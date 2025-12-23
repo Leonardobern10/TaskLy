@@ -1,9 +1,9 @@
-import { errrorsMsg } from "@/errors/errors.message";
+import { errorsMsg } from "@/errors/errors.message";
 import z from "zod";
 
 export const LoginSchema = z.object({
-  email: z.email(errrorsMsg.emailInvalid),
-  password: z.string().min(8, errrorsMsg.lengthPassword),
+  email: z.email(errorsMsg.emailInvalid),
+  password: z.string().min(8, errorsMsg.lengthPassword),
 });
 
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
