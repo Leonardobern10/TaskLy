@@ -9,6 +9,35 @@ import { Separator } from "@radix-ui/react-separator";
 import ButtonCardAction from "../dialog/ButtonCardAction";
 import { statusOptions } from "@/data/selectStatus.data";
 import { orderOptions, priorityOptions } from "@/data/selectPriority.data";
+import { motion } from "motion/react";
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12, // intervalo entre os elementos
+      delayChildren: 0.1, // atraso inicial (opcional)
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 12,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.3,
+      easing: "ease",
+    },
+  },
+};
 
 type SearchTitle = {
   searchTitle: string;
@@ -75,11 +104,23 @@ export default function TasksContainer({ searchTitle }: SearchTitle) {
               Nenhuma tarefa encontrada.
             </div>
           ) : (
-            <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 place-items-center">
+            <motion.ul
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 place-items-center"
+            >
               {tasks.map((task: TaskItem) => (
-                <TaskComponent key={task.id} {...task} />
+                <motion.li
+                  key={task.id}
+                  variants={itemVariants}
+                  className="w-full h-full"
+                >
+                  <TaskComponent key={task.id} {...task} />
+                </motion.li>
               ))}
-            </ul>
+            </motion.ul>
           )}
         </CardContent>
       </Card>
