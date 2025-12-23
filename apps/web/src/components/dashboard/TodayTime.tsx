@@ -2,6 +2,10 @@ import { useDashboard } from "@/hooks/useDashboard";
 import Clock from "./Clock";
 import { motion } from "motion/react";
 
+const style = {
+  date: "text-muted-foreground text-lg",
+};
+
 export default function TodayTime() {
   const { formattedDate, formattedDay } = useDashboard();
   return (
@@ -14,7 +18,7 @@ export default function TodayTime() {
       }}
     >
       <h1>{formattedDay}</h1>
-      <p className="text-muted-foreground text-lg">{formattedDate}</p>
+      <p className={style.date}>{formattedDate}</p>
       <Clock />
     </motion.div>
   );

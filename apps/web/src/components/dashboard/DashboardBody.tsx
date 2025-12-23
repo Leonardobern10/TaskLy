@@ -3,22 +3,33 @@ import NewTaskDialog from "../dialog/NewTaskDialog";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 
+const styles = {
+  dashboardContainer:
+    "flex flex-col sm:flex-row items-center justify-between gap-4 border rounded-xl px-10 py-4 shadow-sm",
+  dashboardContent: "relative w-full sm:max-w-sm",
+  search:
+    "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground",
+  input: "pl-10",
+};
+
+type DashboardBodyProps = {
+  searchTitle: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
 export default function DashboardBody({
   searchTitle,
   onChange,
-}: {
-  searchTitle: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}) {
+}: DashboardBodyProps) {
   return (
-    <section className="flex flex-col sm:flex-row items-center justify-between gap-4 border rounded-xl px-10 py-4 shadow-sm">
+    <section className={styles.dashboardContainer}>
       <NewTaskDialog />
-      <div className="relative w-full sm:max-w-sm">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+      <div className={styles.dashboardContent}>
+        <Search className={styles.search} />
         <Input
           type="text"
           placeholder="Pesquisar tarefa..."
-          className="pl-10"
+          className={styles.input}
           value={searchTitle}
           onChange={onChange}
         />

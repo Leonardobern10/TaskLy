@@ -1,6 +1,11 @@
 import { Calendar } from "../ui/calendar";
 import { motion } from "motion/react";
 
+const styles = {
+  calendar:
+    "rounded-md border shadow-sm [--cell-size:--spacing(8)] md:[--cell-size:--spacing(8)] mb-5 text-secondary/80 bg-primary",
+};
+
 export default function TodayCalendar() {
   const today = new Date();
   return (
@@ -14,7 +19,7 @@ export default function TodayCalendar() {
       <Calendar
         mode="single"
         selected={today}
-        className="rounded-md border shadow-sm [--cell-size:--spacing(8)] md:[--cell-size:--spacing(8)] mb-5 text-secondary/80 bg-primary"
+        className={styles.calendar}
         captionLayout="dropdown"
         disableNavigation
       />
