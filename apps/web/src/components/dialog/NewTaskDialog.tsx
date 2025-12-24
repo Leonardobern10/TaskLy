@@ -20,6 +20,15 @@ import { ControllerDatePicker } from "../form/ControllerDatePicker";
 import { useNewTaskDialog } from "@/hooks/useNewTaskDialog";
 import { ControllerMultiSelect } from "../form/ControllerMultiSelect";
 import { newTaskDialogData } from "@/data/newTaskDialog.data";
+import ContainerInputDialog from "./ContainerInputDialog";
+
+const styles = {
+  icon: "size-4",
+  buttonSpan: "text-sm font-medium",
+  dialogContent: "sm:max-w-106.25 max-h-screen overflow-y-scroll",
+  containerForm: "grid gap-4",
+  containerInput: "grid gap-3",
+};
 
 export default function NewTaskDialog() {
   const { handleSubmit, control, reset, errors, onSubmit, users } =
@@ -30,81 +39,93 @@ export default function NewTaskDialog() {
       <form>
         <DialogTrigger asChild>
           <Button variant="default">
-            <LuPlus className="size-4" />
-            <span className="text-sm font-medium">
+            <LuPlus className={styles.buttonSpan} />
+            <span className={styles.buttonSpan}>
               {newTaskDialogData.buttonNewTask}
             </span>
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-106.25 max-h-screen overflow-y-scroll">
+        <DialogContent className={styles.dialogContent}>
           <DialogHeader>
             <DialogTitle>{newTaskDialogData.dialogTitle}</DialogTitle>
             <DialogDescription>
               {newTaskDialogData.dialogDescription}
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4">
-            <div className="grid gap-3">
-              <ControllerInputForm
-                name="title"
-                control={control}
-                label="Titulo"
-                placeholder="Insira o título da atividade."
-                type="text"
-                primaryColor
-                error={errors.title}
-              />
-            </div>
-            <div className="grid gap-3">
-              <ControllerInputForm
-                name="description"
-                control={control}
-                label="Descrição"
-                placeholder="Insira uma descrição para a atividade."
-                type="text"
-                primaryColor
-                error={errors.description}
-              />
-            </div>
-            <div className="grid gap-3">
-              <ControllerSelect<StatusTaskType>
-                name="status"
-                control={control}
-                label="Status"
-                placeholder="Selecione um status"
-                values={selectStatusValues}
-                error={errors.status}
-              />
-            </div>
-            <div className="grid gap-3">
-              <ControllerSelect<PriorityTaskType>
-                name="priority"
-                control={control}
-                label="Prioridade"
-                placeholder="Defina a prioridade"
-                values={selectPriorityData}
-                error={errors.priority}
-              />
-            </div>
-            <div className="grid gap-3">
-              <ControllerMultiSelect
-                name="assignedEmails"
-                label="Responsáveis"
-                control={control}
-                options={users.map((u) => ({
-                  label: u.email,
-                  value: u.email,
-                }))}
-              />
-            </div>
-            <div className="grid gap-3">
-              <ControllerDatePicker
-                name="dueDate"
-                label="Prazo de entrega"
-                control={control}
-                error={errors.dueDate}
-              />
-            </div>
+          <div className={styles.containerForm}>
+            <ContainerInputDialog
+              children={
+                <ControllerInputForm
+                  name="title"
+                  control={control}
+                  label="Titulo"
+                  placeholder="Insira o título da atividade."
+                  type="text"
+                  primaryColor
+                  error={errors.title}
+                />
+              }
+            />
+            <ContainerInputDialog
+              children={
+                <ControllerInputForm
+                  name="description"
+                  control={control}
+                  label="Descrição"
+                  placeholder="Insira uma descrição para a atividade."
+                  type="text"
+                  primaryColor
+                  error={errors.description}
+                />
+              }
+            />
+            <ContainerInputDialog
+              children={
+                <ControllerSelect<StatusTaskType>
+                  name="status"
+                  control={control}
+                  label="Status"
+                  placeholder="Selecione um status"
+                  values={selectStatusValues}
+                  error={errors.status}
+                />
+              }
+            />
+            <ContainerInputDialog
+              children={
+                <ControllerSelect<PriorityTaskType>
+                  name="priority"
+                  control={control}
+                  label="Prioridade"
+                  placeholder="Defina a prioridade"
+                  values={selectPriorityData}
+                  error={errors.priority}
+                />
+              }
+            />
+            <ContainerInputDialog
+              children={
+                <ControllerMultiSelect
+                  name="assignedEmails"
+                  label="Responsáveis"
+                  control={control}
+                  options={users.map((u) => ({
+                    label: u.email,
+                    value: u.email,
+                  }))}
+                />
+              }
+            />
+            <ContainerInputDialog
+              children={
+                <ControllerDatePicker
+                  name="dueDate"
+                  label="Prazo de entrega"
+                  control={control}
+                  error={errors.dueDate}
+                />
+              }
+            />
           </div>
           <DialogFooter>
             <DialogClose asChild>

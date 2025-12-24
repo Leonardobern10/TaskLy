@@ -14,6 +14,11 @@ import { Button } from "../ui/button";
 import { useCreateCommentDialog } from "@/hooks/useCreateCommentDialog";
 import { createCommentData } from "@/data/createComment.data";
 
+const styles = {
+  dialogContent: "sm:max-w-106.25 max-h-screen",
+  containerInput: "grid gap-4 pt-4",
+};
+
 export default function CreateCommentDialog({ id }: { id: string }) {
   const { handleSubmit, control, errors, onSubmit, reset } =
     useCreateCommentDialog(id);
@@ -33,13 +38,13 @@ export default function CreateCommentDialog({ id }: { id: string }) {
           <LuPlus />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-106.25 max-h-screen">
+      <DialogContent className={styles.dialogContent}>
         <form>
           <DialogHeader>
             <DialogTitle>{dialogTitleText}</DialogTitle>
             <DialogDescription>{dialogDescriptionText}</DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 pt-4">
+          <div className={styles.containerInput}>
             <div>
               <ControllerInputForm
                 name="text"
