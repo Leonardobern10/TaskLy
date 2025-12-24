@@ -9,6 +9,13 @@ import {
 } from "../ui/pagination";
 import { usePagination } from "@/hooks/usePagination";
 
+const styles = {
+  handlePrevious: (page: number) =>
+    page === 1 ? "pointer-events-none opacity-50" : "",
+  handleNext: (page: number, totalPages: number) =>
+    page === totalPages ? "pointer-events-none opacity-50" : "",
+};
+
 export default function PaginationComponent() {
   const dataPages = usePagination();
 
@@ -20,9 +27,7 @@ export default function PaginationComponent() {
           <PaginationPrevious
             aria-disabled={dataPages?.page === 1}
             onClick={dataPages?.handlePrevious}
-            className={
-              dataPages?.page === 1 ? "pointer-events-none opacity-50" : ""
-            }
+            className={styles.handlePrevious(dataPages?.page!)}
           />
         </PaginationItem>
 
@@ -47,11 +52,10 @@ export default function PaginationComponent() {
           <PaginationNext
             aria-disabled={dataPages?.page === dataPages?.totalPages}
             onClick={dataPages?.handleNext}
-            className={
-              dataPages?.page === dataPages?.totalPages
-                ? "pointer-events-none opacity-50"
-                : ""
-            }
+            className={styles.handleNext(
+              dataPages?.page!,
+              dataPages?.totalPages!
+            )}
           />
         </PaginationItem>
       </PaginationContent>

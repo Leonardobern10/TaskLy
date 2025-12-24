@@ -1,3 +1,4 @@
+import { PATH } from "@/utils/path";
 import { Button } from "../ui/button";
 import NavBarListItem from "./NavBarListItem";
 
@@ -8,7 +9,7 @@ export default function HeaderLogged({
 }) {
   return (
     <>
-      <NavBarListItem name="Tasks" path="/tasks/dashboard" />
+      <NavBarListItem name="Tasks" path={PATH.DASHBOARD} />
       <Button onClick={handleLogout}>Sair</Button>
     </>
   );

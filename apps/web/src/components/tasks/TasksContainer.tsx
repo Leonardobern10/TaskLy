@@ -43,16 +43,32 @@ type SearchTitle = {
   searchTitle: string;
 };
 
+const styles = {
+  container: "w-full h-full flex flex-col shadow-sm rounded-xl",
+  containerSkeleton: "grid grid-cols-1 md:grid-cols-3 gap-4",
+  containerPagination: "py-4 px-4",
+  card: "w-full",
+  cardContent: "flex-1 w-full py-6 px-4",
+  buttonGroup:
+    "px-10 rounded-t-lg flex flex-col md:flex-row md:justify-between md:items-center gap-2 md:w-full",
+  selectsGroup: "grid grid-cols-1 sm:grid-cols-3 gap-20",
+  separator: "my-2 w-full bg-neutral-500/20 h-0.5",
+  notFoundMsg: "flex justify-center items-center h-40 text-muted-foreground",
+  listTasks:
+    "grid grid-cols-1 md:grid-cols-3 gap-6 items-center place-items-center",
+  itemTasks: "w-full h-full flex justify-center",
+};
+
 export default function TasksContainer({ searchTitle }: SearchTitle) {
   const { tasks, loading, control, handleReset } = useTasksContainer({
     searchTitle,
   });
 
   return (
-    <div className="w-full h-full flex flex-col shadow-sm rounded-xl">
+    <div className={styles.container}>
       {/* Filtros */}
-      <Card className="w-full">
-        <div className="px-10 rounded-t-lg flex flex-col md:flex-row md:justify-between md:items-center gap-2 md:w-full">
+      <Card className={styles.card}>
+        <div className={styles.buttonGroup}>
           {/* Botão Reset */}
           <ButtonCardAction
             onClick={handleReset}
@@ -61,7 +77,7 @@ export default function TasksContainer({ searchTitle }: SearchTitle) {
           />
 
           {/* Selects */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-20">
+          <div className={styles.selectsGroup}>
             <ControllerSelect
               name="status"
               control={control}
@@ -86,36 +102,31 @@ export default function TasksContainer({ searchTitle }: SearchTitle) {
           </div>
         </div>
 
-        <Separator
-          orientation="horizontal"
-          className="my-2 w-full bg-neutral-500/20 h-0.5"
-        />
+        <Separator orientation="horizontal" className={styles.separator} />
 
         {/* Conteúdo */}
-        <CardContent className="flex-1 w-full py-6 px-4">
+        <CardContent className={styles.cardContent}>
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className={styles.containerSkeleton}>
               {Array.from({ length: 15 }, (_, i) => (
                 <TaskComponentSkeleton key={i} />
               ))}
             </div>
           ) : tasks.length === 0 ? (
-            <div className="flex justify-center items-center h-40 text-muted-foreground">
-              Nenhuma tarefa encontrada.
-            </div>
+            <p className={styles.notFoundMsg}>Nenhuma tarefa encontrada.</p>
           ) : (
             <motion.ul
               variants={containerVariants}
               initial="hidden"
               animate="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 place-items-center"
+              className={styles.listTasks}
             >
               {tasks.map((task: TaskItem) => (
                 <motion.li
                   key={task.id}
                   variants={itemVariants}
-                  className="w-full h-full"
+                  className={styles.itemTasks}
                 >
                   <TaskComponent key={task.id} {...task} />
                 </motion.li>
@@ -126,7 +137,7 @@ export default function TasksContainer({ searchTitle }: SearchTitle) {
       </Card>
 
       {/* Paginação */}
-      <div className="py-4 px-4">
+      <div className={styles.containerPagination}>
         <PaginationComponent />
       </div>
     </div>
