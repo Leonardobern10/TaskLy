@@ -23,8 +23,8 @@ export default function SelectForm<
       <SelectContent>
         <SelectGroup>
           <SelectLabel>{label}</SelectLabel>
-          {values.map((el: SelectType<T>, index: number) => (
-            <SelectItem key={index} value={el.value}>
+          {values.map((el: SelectType<T>) => (
+            <SelectItem key={el.name} value={el.value}>
               {el.name}
             </SelectItem>
           ))}

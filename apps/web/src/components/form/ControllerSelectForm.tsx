@@ -3,6 +3,11 @@ import SelectForm from "./SelectForm";
 import type { ControllerSelectProps } from "@/types/props/ControllerSelectProps";
 import TextError from "../TextError";
 
+const styles = {
+  div: "flex flex-col gap-1",
+  label: "text-sm",
+};
+
 export function ControllerSelect<T>({
   name,
   control,
@@ -18,8 +23,8 @@ export function ControllerSelect<T>({
       control={control}
       rules={rules}
       render={({ field }) => (
-        <div className="flex flex-col gap-1">
-          <label className="text-sm">{label}</label>
+        <div className={styles.div}>
+          <label className={styles.label}>{label}</label>
           <SelectForm
             placeholder={placeholder}
             label={label}

@@ -8,6 +8,11 @@ type ControllerMultiSelectProps = {
   options: any;
 };
 
+const styles = {
+  div: "flex flex-col gap-1",
+  label: "text-sm",
+};
+
 export function ControllerMultiSelect({
   name,
   control,
@@ -19,8 +24,8 @@ export function ControllerMultiSelect({
       control={control}
       name={name}
       render={({ field }) => (
-        <div className="flex flex-col gap-1">
-          <label className="text-sm">{label}</label>
+        <div className={styles.div}>
+          <label className={styles.label}>{label}</label>
           <MultiSelect
             options={options}
             value={field.value || []}

@@ -10,6 +10,13 @@ import {
 import type { DatePickerProps } from "@/types/props/DatePickerProps";
 import { useState } from "react";
 
+const styles = {
+  div: "flex flex-col gap-3",
+  label: "px-1",
+  button: "w-48 justify-between font-normal cursor-pointer",
+  popoverContent: "w-auto overflow-hidden p-0",
+};
+
 export function DatePickerForm({
   selectedDate,
   setSelectedDate,
@@ -18,24 +25,20 @@ export function DatePickerForm({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor="date" className="px-1">
+    <div className={styles.div}>
+      <Label htmlFor="date" className={styles.label}>
         {label}
       </Label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            id="date"
-            className="w-48 justify-between font-normal cursor-pointer"
-          >
+          <Button variant="outline" id="date" className={styles.button}>
             {selectedDate
               ? selectedDate.toLocaleDateString("pt-BR")
-              : Date.now().toLocaleString("pt-BR")}
+              : new Date().toLocaleString("pt-BR")}
             <ChevronDownIcon />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+        <PopoverContent className={styles.popoverContent} align="start">
           <Calendar
             startMonth={new Date(2025, 0)}
             endMonth={new Date(2026, 12)}

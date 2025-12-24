@@ -3,6 +3,10 @@ import { DatePickerForm } from "./DatePickerForm";
 import type { ControllerDatePickerProps } from "@/types/props/ControllerDatePickerProps";
 import TextError from "../TextError";
 
+const styles = {
+  div: "flex flex-col gap-2",
+};
+
 export function ControllerDatePicker({
   name,
   control,
@@ -10,7 +14,7 @@ export function ControllerDatePicker({
   error,
 }: ControllerDatePickerProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className={styles.div}>
       <Controller
         name={name}
         control={control}
