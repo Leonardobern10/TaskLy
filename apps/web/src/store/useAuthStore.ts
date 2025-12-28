@@ -36,8 +36,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   refreshAccessToken: async () => {
     try {
       const data = await refreshToken();
+      if (!data) return null;
       set({ token: data.access_token });
       localStorage.setItem("token", data.access_token);
+      set({ token: data.access_token });
       return data.access_token;
     } catch (err) {
       console.log(err);
@@ -60,8 +62,9 @@ export const useAuthStore = create<AuthState>((set) => ({
       }
 
       const currentUser = await fetchProfile();
-      set({ user: currentUser, loading: false });
-    } catch {
+      console.log(currentUser);
+      set({ user: currentUser });
+    } catch (error) {
       localStorage.removeItem("token");
       set({ user: null, token: null });
     } finally {

@@ -28,7 +28,7 @@ api.interceptors.response.use(
         );
 
         const newToken = response.data.acessToken;
-        useAuthStore.getState().setToken(newToken);
+        useAuthStore.getState().setSession(newToken);
 
         error.config.header.Authorization = `Bearer ${newToken}`;
 

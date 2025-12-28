@@ -8,6 +8,7 @@ export const fetchLogin = async (data: { email: string; password: string }) => {
   try {
     const response = await api.post("/auth/login", data);
     useAuthStore.getState().setSession(response.data.access_token);
+    await useAuthStore.getState().initAuth();
     return true;
   } catch (error) {
     console.log(error);
@@ -45,6 +46,7 @@ export const logout = async () => {
 export const fetchProfile = async (): Promise<UserResponse | null> => {
   try {
     const { data } = await api.get("/auth/profile");
+    console.log(data);
     return data;
   } catch (error) {
     if (
