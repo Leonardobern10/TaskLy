@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import { logout } from "@/services/authService";
-import api from "@/lib/api";
+import { fetchProfile, logout, refreshToken } from "@/services/authService";
 
 type User = {
   id: string;
@@ -9,46 +8,64 @@ type User = {
 };
 
 interface AuthState {
-  isLogged: boolean;
   user: User | null;
   token: string | null;
+  loading: boolean;
+  initAuth: () => Promise<void>;
   setToken: (token: string) => void;
-  setSession: (token: string, user: User) => void;
+  setSession: (token: string) => void;
   refreshAccessToken: () => Promise<string | null>;
   logout: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   token: localStorage.getItem("token") ?? null,
-  user: JSON.parse(localStorage.getItem("user") ?? "null"),
-  isLogged: !!localStorage.getItem("token"),
+  user: null,
+  loading: false,
 
-  setSession: (token, user) => {
+  setSession: (token) => {
     localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
-    set({ token, user, isLogged: true });
+    set({ token });
   },
 
   setToken: (token) => {
-    set({ token: token, isLogged: true });
+    set({ token: token });
     localStorage.setItem("token", token);
   },
 
   refreshAccessToken: async () => {
     try {
-      const { data } = await api.post("auth/refresh", {});
+      const data = await refreshToken();
       set({ token: data.access_token });
       localStorage.setItem("token", data.access_token);
       return data.access_token;
     } catch (err) {
-      return null;
+      console.log(err);
     }
   },
 
   logout: async () => {
+    set({ loading: true });
     await logout();
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    set({ token: null, user: null, isLogged: false });
+    set({ token: null, user: null, loading: false });
+  },
+
+  initAuth: async () => {
+    try {
+      set({ loading: true });
+      if (!localStorage.getItem("token")) {
+        set({ user: null, loading: false });
+        return;
+      }
+
+      const currentUser = await fetchProfile();
+      set({ user: currentUser, loading: false });
+    } catch {
+      localStorage.removeItem("token");
+      set({ user: null, token: null });
+    } finally {
+      set({ loading: false });
+    }
   },
 }));

@@ -4,16 +4,17 @@ import { useWebSocketStore } from "./store/websocket";
 import { useEffect } from "react";
 import { useNotifications } from "./hooks/useNotifications";
 import Header from "./components/header/Header";
+import { Spinner } from "./components/ui/spinner";
 
 function App() {
-  const { user, token } = useAuthStore();
+  const { user, token, initAuth, loading } = useAuthStore();
   const connect = useWebSocketStore((s) => s.connect);
 
   // conectar websocket
   useEffect(() => {
-    console.log(token);
+    initAuth();
     if (token && user?.email) connect();
-  }, [user]);
+  }, []);
 
   // ativar toast hook
   useNotifications();
@@ -22,7 +23,7 @@ function App() {
     <div className="flex flex-col justify-center items-center w-full h-full">
       <Header />
       <div className="h-full w-full py-8">
-        <Outlet />
+        {loading ? <Spinner /> : <Outlet />}
       </div>
     </div>
   );
