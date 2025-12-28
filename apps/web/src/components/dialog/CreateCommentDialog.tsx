@@ -19,8 +19,11 @@ const styles = {
   containerInput: "grid gap-4 pt-4",
   button: "cursor-pointer",
 };
+type CreateCommentDialogProps = {
+  id: string;
+};
 
-export default function CreateCommentDialog({ id }: { id: string }) {
+export default function CreateCommentDialog({ id }: CreateCommentDialogProps) {
   const { handleSubmit, control, errors, onSubmit, reset } =
     useCreateCommentDialog(id);
   const {

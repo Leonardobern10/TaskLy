@@ -3,11 +3,11 @@ import { Button } from "../ui/button";
 import NavBarListItem from "./NavBarListItem";
 import { buttonData } from "@/data/button.data";
 
-export default function HeaderLogged({
-  handleLogout,
-}: {
+type HeaderLoggedProps = {
   handleLogout: () => Promise<void>;
-}) {
+};
+
+export default function HeaderLogged({ handleLogout }: HeaderLoggedProps) {
   return (
     <>
       <NavBarListItem name="Tasks" path={PATH.DASHBOARD} />

@@ -3,12 +3,12 @@ import { useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 export const useTasks = () => {
-  const { isLogged } = useAuthStore();
+  const { user } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
     const auth = () => {
-      if (!isLogged) router.navigate({ from: "/auth/login" });
+      if (!user) router.navigate({ from: "/auth/login" });
     };
     auth();
   }, []);

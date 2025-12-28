@@ -2,7 +2,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "@tanstack/react-router";
 
 export const useHome = () => {
-  const { isLogged, logout } = useAuthStore();
+  const { user, logout } = useAuthStore();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -10,5 +10,5 @@ export const useHome = () => {
     router.navigate({ from: "/auth/login" });
   };
 
-  return { isLogged, handleLogout };
+  return { user, handleLogout };
 };

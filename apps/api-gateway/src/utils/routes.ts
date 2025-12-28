@@ -8,7 +8,7 @@ export const Routes = {
       BODY_SCHEMA: {
         schema: { example: { email: 'joao@email.com', password: '123456' } },
       },
-      RESPONSE_201: {
+      RESPONSE_200: {
         description: 'User authenticated successfully',
         schema: {
           example: {

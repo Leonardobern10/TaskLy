@@ -57,7 +57,7 @@ export class AuthController implements InterfaceAuthController {
   @Post(Routes.AUTH.LOGIN.PATH)
   @ApiOperation(Routes.AUTH.LOGIN.DESCRIPTION)
   @ApiBody(Routes.AUTH.LOGIN.BODY_SCHEMA)
-  @ApiCreatedResponse(Routes.AUTH.LOGIN.RESPONSE_201)
+  @ApiOkResponse(Routes.AUTH.LOGIN.RESPONSE_200)
   @ApiUnauthorizedResponse(Routes.AUTH.LOGIN.UNAUTHORIZED_401)
   @ApiBadRequestResponse(Routes.AUTH.LOGIN.BAD_REQUEST_400)
   async login(

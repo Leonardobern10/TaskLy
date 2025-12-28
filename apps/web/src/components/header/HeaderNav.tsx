@@ -8,11 +8,11 @@ const styles = {
 };
 
 export default function HeaderNav() {
-  const { handleLogout, isLogged } = useHeader();
+  const { handleLogout, user } = useHeader();
   return (
     <nav className={styles.nav}>
       <ul className={styles.ul}>
-        {isLogged ? (
+        {user ? (
           <HeaderLogged handleLogout={handleLogout} />
         ) : (
           <HeaderUnLogged />

@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 
 export const useTasksContainer = ({ searchTitle }: { searchTitle: string }) => {
   const { tasks, loading, setFilters } = useTaskStore();
-  const { isLogged } = useAuthStore();
+  const { user } = useAuthStore();
   const { control, watch, reset } = useForm<FilterFormValues>({
     defaultValues: { status: "", priority: "", order: OrderParams.CREATED },
   });
@@ -23,7 +23,7 @@ export const useTasksContainer = ({ searchTitle }: { searchTitle: string }) => {
   };
 
   useEffect(() => {
-    if (!isLogged) router.navigate({ from: "/auth/login" });
+    if (!user) router.navigate({ from: "/auth/login" });
 
     const delay = setTimeout(() => {
       setFilters({
@@ -34,7 +34,7 @@ export const useTasksContainer = ({ searchTitle }: { searchTitle: string }) => {
       });
     }, 400);
     return () => clearTimeout(delay);
-  }, [isLogged, searchTitle, selectedStatus, selectedPriority, selectedOrder]);
+  }, [user, searchTitle, selectedStatus, selectedPriority, selectedOrder]);
 
   return {
     tasks,

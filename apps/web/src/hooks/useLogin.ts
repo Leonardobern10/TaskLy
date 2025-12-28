@@ -21,12 +21,11 @@ export const useLogin = () => {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginSchemaType> = async (data) => {
-    console.log(data);
     const sucess = await fetchLogin(data);
     if (sucess) {
-      toast.success("Login efetuado com sucesso!");
       navigate({ from: "/tasks/dashboard" });
       reset();
+      toast.success("Login efetuado com sucesso!");
     }
   };
 

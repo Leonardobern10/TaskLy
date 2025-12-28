@@ -2,7 +2,11 @@ const style = {
   containerCommentText: "text-sm",
 };
 
-export default function CommentText({ text }: { text: string }) {
+type CommentTextProps = {
+  text: string;
+};
+
+export default function CommentText({ text }: CommentTextProps) {
   return (
     <p className={style.containerCommentText}>
       <em>"{text}"</em>

@@ -29,15 +29,15 @@ export const useUpdateTaskDialog = (task: TaskItem) => {
       dueDate: task.dueDate ? new Date(task.dueDate) : new Date(), // apenas a data
     },
   });
-  const { isLogged } = useAuthStore();
+  const { user } = useAuthStore();
   const { users } = useUsersStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLogged) {
+    if (!user) {
       router.navigate({ from: "/auth/login" });
     }
-  }, [isLogged]);
+  }, [user]);
 
   const onSubmit: SubmitHandler<UpdateTaskSchemaType> = async (data) => {
     console.log("Dados atualizados: ", data);
@@ -52,7 +52,7 @@ export const useUpdateTaskDialog = (task: TaskItem) => {
     control,
     errors,
     reset,
-    isLogged,
+    user,
     users,
   };
 };

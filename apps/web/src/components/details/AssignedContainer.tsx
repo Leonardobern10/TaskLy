@@ -10,11 +10,13 @@ const dataComponent = {
   title: "Responsáveis: ",
 };
 
+type AssignedContainerProps = {
+  assignedEmails: string[];
+};
+
 export default function AssignedContainer({
   assignedEmails,
-}: {
-  assignedEmails: string[];
-}) {
+}: AssignedContainerProps) {
   return (
     <div>
       <p className={style.title}>{dataComponent.title}</p>

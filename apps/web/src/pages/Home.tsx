@@ -17,7 +17,7 @@ const styles = {
 };
 
 export default function Home() {
-  const { isLogged, handleLogout } = useHome();
+  const { user, handleLogout } = useHome();
 
   return (
     <div className={styles.homeContainer}>
@@ -29,7 +29,7 @@ export default function Home() {
         </p>
 
         <div className={styles.containerButtons}>
-          {isLogged ? (
+          {user ? (
             <ButtonGroupLogged handleLogout={handleLogout} />
           ) : (
             <ButtonGroupUnLogged />
