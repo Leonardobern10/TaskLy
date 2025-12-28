@@ -60,7 +60,6 @@ export const useAuthStore = create<AuthState>((set) => ({
         set({ user: null, loading: false });
         return;
       }
-
       const currentUser = await fetchProfile();
       console.log(currentUser);
       set({ user: currentUser });
