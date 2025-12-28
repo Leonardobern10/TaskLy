@@ -17,7 +17,7 @@ export default function SelectForm<
 >({ placeholder, label, values, value, onValueChange }: SelectFormProps<T>) {
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-45">
+      <SelectTrigger className="w-full md:w-fit">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

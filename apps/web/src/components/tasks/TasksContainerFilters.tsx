@@ -6,8 +6,9 @@ import { orderOptions, priorityOptions } from "@/data/selectPriority.data";
 
 const styles = {
   buttonGroup:
-    "px-10 rounded-t-lg flex flex-col md:flex-row md:justify-between md:items-center gap-2 md:w-full",
-  selectsGroup: "grid grid-cols-1 sm:grid-cols-3 gap-20",
+    "px-10 rounded-t-lg flex flex-col md:flex-row md:justify-between md:items-center gap-5 md:gap-10 md:w-full",
+  selectsGroup:
+    "grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-20 max-md:place-items-start",
 };
 
 export default function TasksContainerFilters({

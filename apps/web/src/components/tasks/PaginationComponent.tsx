@@ -14,7 +14,7 @@ const styles = {
     page === 1 ? "pointer-events-none opacity-50" : "",
   handleNext: (page: number, totalPages: number) =>
     page === totalPages ? "pointer-events-none opacity-50" : "",
-  containerPagination: "py-4 px-4",
+  containerPagination: "py-4 px-2 w-5/6 md:w-full",
 };
 
 export default function PaginationComponent() {
@@ -47,7 +47,7 @@ export default function PaginationComponent() {
           ))}
 
           {/* ELLIPSIS (opcional caso tenha muitas páginas) */}
-          {dataPages?.totalPages! > 7 && <PaginationEllipsis />}
+          {dataPages?.totalPages! > 4 && <PaginationEllipsis />}
 
           {/* NEXT */}
           <PaginationItem>
