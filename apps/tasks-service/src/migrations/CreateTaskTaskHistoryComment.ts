@@ -59,7 +59,7 @@ export class CreateTaskTaskHistoryComment1680000000000 implements MigrationInter
     // COMMENT
     await queryRunner.query(`
       CREATE TABLE IF NOT EXISTS "comment" (
-        "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
+         "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
         "text" character varying NOT NULL,
         "author" character varying,
         "taskId" uuid,

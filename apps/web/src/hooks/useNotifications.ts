@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useWebSocketStore } from "@/store/websocket";
 import { toast } from "sonner"; // shadcn
+import { useRouter } from "@tanstack/react-router";
 
 export function useNotifications() {
   const token = useAuthStore((s) => s.token);
@@ -9,16 +10,18 @@ export function useNotifications() {
   const lastEvent = useWebSocketStore((s) => s.lastEvent);
   const connect = useWebSocketStore((s) => s.connect);
   const disconnect = useWebSocketStore((s) => s.disconnect);
+  const router = useRouter();
 
   // conecta no websocket quando logado
   useEffect(() => {
     if (token && user?.email) {
       connect();
+      return () => disconnect();
     } else {
       disconnect();
     }
 
-    return () => disconnect();
+    disconnect();
   }, [token, user?.email]);
 
   // recebe eventos do WebSocket
@@ -27,8 +30,16 @@ export function useNotifications() {
 
     switch (lastEvent.type) {
       case "tasks.created":
-        toast.success("Nova tarefa criada!", {
-          description: lastEvent.payload.title,
+        console.log(lastEvent);
+        toast("Nova tarefa criada!", {
+          action: {
+            label: "Verificar",
+            onClick: () =>
+              router.navigate({
+                to: "/tasks/$id",
+                params: { id: lastEvent.payload.id },
+              }),
+          },
         });
         break;
       case "tasks.updated":
@@ -37,8 +48,8 @@ export function useNotifications() {
         });
         break;
       case "comment.new":
-        toast.info("Novo comentário recebido!", {
-          description: lastEvent.payload.content,
+        toast.message("Novo comentário recebido!", {
+          description: lastEvent.payload.text,
         });
         break;
     }

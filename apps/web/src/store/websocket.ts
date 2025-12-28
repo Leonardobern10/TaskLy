@@ -51,7 +51,7 @@ export const useWebSocketStore = create<WebSocketStore>((set, get) => ({
       try {
         const data = JSON.parse(message.data);
         set({ lastEvent: data });
-        console.log("mensagem enviada");
+        console.log(data);
       } catch (err) {
         console.error("WebSocket JSON error:", err);
       }

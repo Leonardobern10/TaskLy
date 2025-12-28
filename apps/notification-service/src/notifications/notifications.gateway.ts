@@ -58,6 +58,7 @@ export class NotificationsGateway
    */
   broadcast(event: string, data: any) {
     const payload = JSON.stringify({ type: event, payload: data });
+    console.log('Broadcast: ', payload);
     this.server.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(payload);

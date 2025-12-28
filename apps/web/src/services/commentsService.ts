@@ -7,7 +7,6 @@ export const saveComment = async (
 ) => {
   try {
     const response = await api.post(`/tasks/${taskId}/comments`, data);
-    console.log("Enviado: ", data);
     return response.data;
   } catch (error) {
     console.error(error);

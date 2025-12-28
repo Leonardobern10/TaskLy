@@ -4,7 +4,7 @@ import DashboardTop from "@/components/dashboard/DashboardTop";
 import DashboardBody from "@/components/dashboard/DashboardBody";
 
 const styles = {
-  container: "min-h-screen bg-muted/40 px-4 py-8",
+  container: "min-h-screen px-4 py-8",
   content: "mx-auto max-w-6xl space-y-8",
 };
 

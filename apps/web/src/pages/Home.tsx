@@ -7,7 +7,7 @@ import type { CardHomepage } from "@/types/CardHomepageType";
 
 const styles = {
   homeContainer:
-    "h-full md:h-full flex flex-col items-center justify-center bg-gray-50 px-4 py-12",
+    "h-full md:h-full flex flex-col items-center justify-center px-4 py-12",
   bodyContainer: "max-w-2xl text-center space-y-6",
   descriptionHomepage: "text-lg text-gray-600",
   containerButtons:
