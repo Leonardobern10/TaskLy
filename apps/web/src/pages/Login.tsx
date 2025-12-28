@@ -1,24 +1,34 @@
 import InputWithLabel from "@/components/form/InputWithLabel";
 import HeaderSection from "@/components/header/HeaderSection";
 import { Button } from "@/components/ui/button";
+import { buttonData } from "@/data/button.data";
+import { dialogTexts } from "@/data/dialog.data";
 import { useLogin } from "@/hooks/useLogin";
+import { PATH } from "@/utils/path";
 import { Controller } from "react-hook-form";
+
+const styles = {
+  containerAuth: "container-auth",
+  bodyAuth: "body-auth",
+  formAuth: "form-auth",
+  button: "w-full mt-2 cursor-pointer",
+};
 
 export default function Login() {
   const { handleSubmit, control, errors, onSubmit } = useLogin();
 
   return (
-    <div className="container-auth">
-      <div className="body-auth">
+    <div className={styles.containerAuth}>
+      <div className={styles.bodyAuth}>
         {/* Header */}
         <HeaderSection
           title="Entrar"
           text="Ainda não tem conta? Cadastre-se"
-          linkTo="/auth/register"
+          linkTo={PATH.REGISTER}
         />
 
         {/* Form */}
-        <form className="form-auth" onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.formAuth} onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
           <Controller
             name="email"
@@ -27,8 +37,8 @@ export default function Login() {
               <InputWithLabel
                 id="email"
                 inputType="email"
-                label="E-mail"
-                placeholder="Digite seu email"
+                label={dialogTexts.email.label}
+                placeholder={dialogTexts.email.placeholder}
                 error={errors.email}
                 {...field}
                 primaryColor
@@ -44,8 +54,8 @@ export default function Login() {
               <InputWithLabel
                 id="password"
                 inputType="password"
-                label="Senha"
-                placeholder="Digite sua senha"
+                label={dialogTexts.password.label}
+                placeholder={dialogTexts.password.placeholder}
                 error={errors.password}
                 {...field}
                 primaryColor
@@ -59,9 +69,9 @@ export default function Login() {
             variant="default"
             size="lg"
             disabled={Object.keys(errors).length > 0}
-            className="w-full mt-2 cursor-pointer"
+            className={styles.button}
           >
-            Entrar
+            {buttonData.enter}
           </Button>
         </form>
       </div>

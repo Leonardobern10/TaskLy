@@ -1,3 +1,4 @@
+import { buttonData } from "@/data/button.data";
 import type { HeaderSectionProps } from "@/types/props/HeaderSectionProps";
 import { Link } from "@tanstack/react-router";
 
@@ -19,7 +20,7 @@ export default function HeaderSection({
       <p className={styles.p}>
         {text}{" "}
         <em className={styles.em}>
-          <Link to={linkTo}>aqui</Link>
+          <Link to={linkTo}>{buttonData.linkHere}</Link>
         </em>
         .
       </p>

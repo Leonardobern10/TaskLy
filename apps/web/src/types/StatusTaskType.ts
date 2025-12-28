@@ -1,6 +1,6 @@
 export enum StatusTaskType {
-  "DONE" = "FEITO",
-  "IN_PROGRESS" = "EM ANDAMENTO",
-  "TODO" = "A FAZER",
-  "REVIEW" = "REVISAR",
+  "DONE" = "DONE",
+  "IN_PROGRESS" = "IN_PROGRESS",
+  "TODO" = "TODO",
+  "REVIEW" = "REVIEW",
 }

@@ -16,18 +16,9 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { ALERTS } from "@/utils/alerts";
-
-type Option = {
-  label: string;
-  value: string;
-};
-
-interface MultiSelectProps {
-  options: Option[];
-  value: string[];
-  onChange: (value: string[]) => void;
-  placeholder?: string;
-}
+import type { MultiSelectProps } from "@/types/MultiSelectProps";
+import type { Option } from "@/types/Option";
+import { toggleItem } from "@/services/multiSelectService";
 
 export function MultiSelect({
   options,
@@ -35,15 +26,6 @@ export function MultiSelect({
   onChange,
   placeholder,
 }: MultiSelectProps) {
-  const toggleItem = (item: string) => {
-    if (value.includes(item)) {
-      onChange(value.filter((v) => v !== item));
-    } else {
-      onChange([...value, item]);
-    }
-    console.log(value);
-  };
-
   const styles = {
     button: "w-full justify-between",
     chevrons: "w-4 h-4 opacity-50",
@@ -80,7 +62,7 @@ export function MultiSelect({
               {options.map((opt) => (
                 <CommandItem
                   key={opt.value}
-                  onSelect={() => toggleItem(opt.value)}
+                  onSelect={() => toggleItem(opt.value, value, onChange)}
                 >
                   <div className={styles.options(value, opt)}>
                     {value.includes(opt.value) && (

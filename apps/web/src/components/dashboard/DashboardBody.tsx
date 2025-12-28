@@ -12,6 +12,11 @@ const styles = {
   input: "pl-10",
 };
 
+const dataComponent = {
+  inputType: "text",
+  inputPlaceholder: "Pesquisar tarefa...",
+};
+
 type DashboardBodyProps = {
   searchTitle: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -27,8 +32,8 @@ export default function DashboardBody({
       <div className={styles.dashboardContent}>
         <Search className={styles.search} />
         <Input
-          type="text"
-          placeholder="Pesquisar tarefa..."
+          type={dataComponent.inputType}
+          placeholder={dataComponent.inputPlaceholder}
           className={styles.input}
           value={searchTitle}
           onChange={onChange}

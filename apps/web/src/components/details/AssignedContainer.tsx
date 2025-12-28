@@ -6,6 +6,10 @@ const style = {
   alert: "text-neutral-700 font-medium",
 };
 
+const dataComponent = {
+  title: "Responsáveis: ",
+};
+
 export default function AssignedContainer({
   assignedEmails,
 }: {
@@ -13,7 +17,7 @@ export default function AssignedContainer({
 }) {
   return (
     <div>
-      <p className={style.title}>Responsáveis: </p>
+      <p className={style.title}>{dataComponent.title}</p>
       {assignedEmails.length === 0 ? (
         <p className={style.alert}>{ALERTS.withoutAssigneds}</p>
       ) : (

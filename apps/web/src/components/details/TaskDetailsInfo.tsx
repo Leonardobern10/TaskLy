@@ -13,6 +13,13 @@ const styles = {
   content: "space-y-1 text-sm",
 };
 
+const dataComponent = {
+  title: "Informações",
+  createdAt: "Criado em",
+  updatedAt: "Última atualização",
+  autor: "Autor",
+};
+
 export default function TaskDetailsInfo({
   createdAt,
   updatedAt,
@@ -21,14 +28,17 @@ export default function TaskDetailsInfo({
 }: TaskDetailsInfoProps) {
   return (
     <section>
-      <h3 className={styles.h3}>Informações</h3>
+      <h3 className={styles.h3}>{dataComponent.title}</h3>
       <div className={styles.content}>
-        <InfoDetailsContainer title="Criado em" value={new Date(createdAt)} />
         <InfoDetailsContainer
-          title="Última atualização"
+          title={dataComponent.createdAt}
+          value={new Date(createdAt)}
+        />
+        <InfoDetailsContainer
+          title={dataComponent.updatedAt}
           value={new Date(updatedAt)}
         />
-        <InfoDetailsContainer title="Autor" value={authorEmail} />
+        <InfoDetailsContainer title={dataComponent.autor} value={authorEmail} />
         <AssignedContainer assignedEmails={assignedEmails} />
       </div>
     </section>

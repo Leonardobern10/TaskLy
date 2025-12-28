@@ -11,8 +11,8 @@ import TimeTaskComponent from "./TimeTaskComponent";
 import { GrTask } from "react-icons/gr";
 import { chooseColor } from "@/utils/getPriorityColor";
 import { Link } from "@tanstack/react-router";
-import { PATH } from "@/utils/path";
 import type { ColorFormat } from "@/types/ColorFormat";
+import { PATH } from "@/utils/path";
 
 const styles = (color: ColorFormat) => ({
   card: `flex transition-all sm:w-5/6 duration-200 hover:shadow-md hover:scale-[1.01] cursor-pointer border border-border/60 rounded-xl ${color.shadow}`,
@@ -39,25 +39,24 @@ export default function TaskComponent({
 
   return (
     <Card className={stylesCustom.card}>
-      <Link to={`/tasks/$id`} params={{ id }} className={stylesCustom.link}>
+      <Link
+        to={PATH.TASKS_DETAILS}
+        params={{ id }}
+        className={stylesCustom.link}
+      >
         <CardHeader className={stylesCustom.cardHeader}>
           <div className={stylesCustom.containerTitle}>
             <GrTask className={stylesCustom.icon} />
             <CardTitle className={stylesCustom.cardTitle}>{title}</CardTitle>
           </div>
-
           {description && (
             <CardDescription className={stylesCustom.cardDescription}>
               {description}
             </CardDescription>
           )}
         </CardHeader>
-
         <CardContent className={stylesCustom.cardContent}>
-          {/* Status + Prioridade */}
           <BadgesContainer status={status} priority={priority} />
-
-          {/* Informações */}
           <div className={stylesCustom.containerTime}>
             <TimeTaskComponent dueDate={dueDate} color={color.text} />
           </div>

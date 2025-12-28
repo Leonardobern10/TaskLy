@@ -17,6 +17,7 @@ import { createCommentData } from "@/data/createComment.data";
 const styles = {
   dialogContent: "sm:max-w-106.25 max-h-screen",
   containerInput: "grid gap-4 pt-4",
+  button: "cursor-pointer",
 };
 
 export default function CreateCommentDialog({ id }: { id: string }) {
@@ -64,7 +65,7 @@ export default function CreateCommentDialog({ id }: { id: string }) {
               {dialogCloseText}
             </Button>
           </DialogClose>
-          <Button className="cursor-pointer" onClick={handleSubmit(onSubmit)}>
+          <Button className={styles.button} onClick={handleSubmit(onSubmit)}>
             {buttonSaveText}
           </Button>
         </DialogFooter>

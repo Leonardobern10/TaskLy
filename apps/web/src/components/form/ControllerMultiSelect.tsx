@@ -6,6 +6,7 @@ type ControllerMultiSelectProps = {
   control: any;
   label: string;
   options: any;
+  placeholder: string;
 };
 
 const styles = {
@@ -18,6 +19,7 @@ export function ControllerMultiSelect({
   control,
   label,
   options,
+  placeholder,
 }: ControllerMultiSelectProps) {
   return (
     <Controller
@@ -30,7 +32,7 @@ export function ControllerMultiSelect({
             options={options}
             value={field.value || []}
             onChange={field.onChange}
-            placeholder="Selecionar responsáveis"
+            placeholder={placeholder}
           />
         </div>
       )}

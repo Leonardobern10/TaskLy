@@ -3,22 +3,32 @@ import { Button } from "@/components/ui/button";
 import { Controller } from "react-hook-form";
 import { useRegister } from "@/hooks/useRegister";
 import InputWithLabel from "@/components/form/InputWithLabel";
+import { PATH } from "@/utils/path";
+import { buttonData } from "@/data/button.data";
+import { dialogTexts } from "@/data/dialog.data";
+
+const styles = {
+  containerAuth: "container-auth",
+  bodyAuth: "body-auth",
+  formAuth: "form-auth",
+  button: "w-full mt-2 cursor-pointer",
+};
 
 export default function Register() {
   const { control, handleSubmit, onSubmit, errors } = useRegister();
 
   return (
-    <div className="container-auth">
-      <div className="body-auth">
+    <div className={styles.containerAuth}>
+      <div className={styles.bodyAuth}>
         {/* Header */}
         <HeaderSection
           title="Criar Conta"
           text="Já possui cadastro? Entre"
-          linkTo="/auth/login"
+          linkTo={PATH.LOGIN}
         />
 
         {/* Form */}
-        <form className="form-auth" onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.formAuth} onSubmit={handleSubmit(onSubmit)}>
           {/* Nome */}
           <Controller
             name="name"
@@ -27,8 +37,8 @@ export default function Register() {
               <InputWithLabel
                 inputType="text"
                 id="name"
-                placeholder="Digite seu nome"
-                label="Nome"
+                placeholder={dialogTexts.name.placeholder}
+                label={dialogTexts.name.label}
                 error={errors.name}
                 {...field}
                 primaryColor
@@ -44,8 +54,8 @@ export default function Register() {
               <InputWithLabel
                 inputType="email"
                 id="email"
-                placeholder="Digite seu email"
-                label="E-mail"
+                placeholder={dialogTexts.email.placeholder}
+                label={dialogTexts.email.label}
                 error={errors.email}
                 {...field}
                 primaryColor
@@ -61,8 +71,8 @@ export default function Register() {
               <InputWithLabel
                 inputType="password"
                 id="password"
-                placeholder="Digite sua senha"
-                label="Senha"
+                placeholder={dialogTexts.password.placeholder}
+                label={dialogTexts.password.label}
                 error={errors.password}
                 {...field}
                 primaryColor
@@ -78,8 +88,8 @@ export default function Register() {
               <InputWithLabel
                 inputType="password"
                 id="confirmPassword"
-                placeholder="Confirme sua senha"
-                label="Confirmar senha"
+                placeholder={dialogTexts.confirmPassword.placeholder}
+                label={dialogTexts.confirmPassword.label}
                 error={errors.confirmPassword}
                 {...field}
                 primaryColor
@@ -93,9 +103,9 @@ export default function Register() {
             variant="default"
             size="lg"
             disabled={Object.keys(errors).length > 0}
-            className="w-full mt-2 cursor-pointer"
+            className={styles.button}
           >
-            Cadastrar
+            {buttonData.register}
           </Button>
         </form>
       </div>

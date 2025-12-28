@@ -22,11 +22,14 @@ import type { TaskItem } from "@/types/TaskItem";
 import { ControllerMultiSelect } from "../form/ControllerMultiSelect";
 import { updateTaskDialogData } from "@/data/updateTaskDialog.data";
 import ContainerInputDialog from "./ContainerInputDialog";
+import { dialogTexts } from "@/data/dialog.data";
 
 const styles = {
   dialogContent: "sm:max-w-125",
   form: "flex flex-col gap-4",
   dialogFooter: "mt-4",
+  buttonClose: "cursor-pointer",
+  button: "text-primary",
 };
 
 export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
@@ -36,7 +39,7 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="text-primary">
+        <Button variant="outline" className={styles.button}>
           <FaRegEdit />
           <p>{updateTaskDialogData.buttonEdit}</p>
         </Button>
@@ -56,8 +59,8 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
               <ControllerInputForm
                 name="title"
                 control={control}
-                label="Titulo"
-                placeholder="Insira o título da atividade."
+                label={dialogTexts.taskTitle.label}
+                placeholder={dialogTexts.taskTitle.placeholder}
                 type="text"
                 primaryColor
                 error={errors.title}
@@ -69,8 +72,8 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
               <ControllerInputForm
                 name="description"
                 control={control}
-                label="Descrição"
-                placeholder="Insira uma descrição."
+                label={dialogTexts.description.label}
+                placeholder={dialogTexts.description.placeholder}
                 type="text"
                 primaryColor
                 error={errors.description}
@@ -82,8 +85,8 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
               <ControllerSelect<PriorityTaskType>
                 name="priority"
                 control={control}
-                label="Prioridade"
-                placeholder="Defina a prioridade"
+                label={dialogTexts.priority.label}
+                placeholder={dialogTexts.priority.placeholder}
                 values={selectPriorityData}
                 error={errors.priority}
               />
@@ -94,8 +97,8 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
               <ControllerSelect<StatusTaskType>
                 name="status"
                 control={control}
-                label="Status"
-                placeholder="Selecione um status"
+                label={dialogTexts.status.label}
+                placeholder={dialogTexts.status.placeholder}
                 values={selectStatusValues}
                 error={errors.status}
               />
@@ -105,12 +108,13 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
             children={
               <ControllerMultiSelect
                 name="assignedEmails"
-                label="Responsáveis"
+                label={dialogTexts.assigned.label}
                 control={control}
                 options={users.map((u) => ({
                   label: u.email,
                   value: u.email,
                 }))}
+                placeholder={dialogTexts.assigned.placeholder}
               />
             }
           />
@@ -118,7 +122,7 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
             children={
               <ControllerDatePicker
                 name="dueDate"
-                label="Prazo de entrega"
+                label={dialogTexts.dueDate.label}
                 control={control}
                 error={errors.dueDate}
               />
@@ -127,7 +131,7 @@ export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
           <DialogFooter className={styles.dialogFooter}>
             <DialogClose asChild>
               <Button
-                className="cursor-pointer"
+                className={styles.buttonClose}
                 variant="outline"
                 onClick={() => reset()}
               >
