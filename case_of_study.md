@@ -8,8 +8,6 @@ The **Task Management System** is a fullstack project designed to simulate a rea
 
 The project emphasizes **backend architecture**, **event-driven microservices**, and **clean separation of concerns**, while maintaining a functional React-based frontend to consume and validate the APIs.
 
----
-
 ## Problem Statement
 
 In real production systems, applications often suffer from:
@@ -20,8 +18,6 @@ In real production systems, applications often suffer from:
 * Frontend performance issues caused by uncontrolled state updates
 
 This project was created to address these challenges by applying **modern backend architecture patterns**, **asynchronous communication**, and **frontend performance optimizations**, simulating scenarios commonly found in enterprise systems.
-
----
 
 ## Architecture & Technical Decisions
 
@@ -45,7 +41,6 @@ This project was created to address these challenges by applying **modern backen
 * Monorepo structure using **Turborepo**, enabling shared tooling and consistent patterns
 * APIs documented with **Swagger/OpenAPI** for easy integration
 
----
 
 ## Key Results & Impact
 
@@ -57,7 +52,6 @@ This project was created to address these challenges by applying **modern backen
 
 These improvements resulted in a system that is easier to evolve, debug, and scale — closely resembling production-grade backend platforms.
 
----
 
 ## Security & Observability
 
@@ -65,8 +59,6 @@ These improvements resulted in a system that is easier to evolve, debug, and sca
 * Structured logging using **Pino**, enabling easier monitoring and debugging
 * Clear separation between authentication, business logic, and infrastructure layers
 * APIs designed with security and extensibility in mind
-
----
 
 ## What This Project Demonstrates
 
@@ -78,8 +70,6 @@ This project demonstrates my ability to:
 * Optimize both **backend performance** and **frontend rendering**
 * Work with **clean architecture**, testing-ready codebases, and containerized environments
 * Think in terms of **real-world constraints**, not just isolated features
-
----
 
 ## Tech Stack
 
@@ -100,8 +90,6 @@ This project demonstrates my ability to:
 * Turborepo (Monorepo)
 * Swagger / OpenAPI
 * Git
-
----
 
 ## Links
 
