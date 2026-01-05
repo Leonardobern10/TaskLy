@@ -6,11 +6,11 @@ const styles = {
     "py-1 px-2 font-medium tracking-wider bg-gray-300/70 text-neutral-700 text-xs",
 };
 
-export default function StatusTaskBadge({
-  status,
-}: {
+type StatusTaskBadgeProps = {
   status: StatusTaskType;
-}) {
+};
+
+export default function StatusTaskBadge({ status }: StatusTaskBadgeProps) {
   return (
     <Badge variant="outline" className={styles.badge}>
       {status}

@@ -2,7 +2,11 @@ const styles = {
   commentAuthorContainer: "font-bold",
 };
 
-export default function CommentAuthor({ author }: { author: string }) {
+type CommentAuthorProps = {
+  author: string;
+};
+
+export default function CommentAuthor({ author }: CommentAuthorProps) {
   return (
     <p>
       <span className={styles.commentAuthorContainer}>{author}</span>

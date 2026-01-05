@@ -3,11 +3,11 @@ import { Button } from "../ui/button";
 import { PATH } from "@/utils/path";
 import { buttonData } from "@/data/button.data";
 
-type HandleLogoutType = {
+type HandleLogoutProps = {
   handleLogout: () => Promise<void>;
 };
 
-export default function ButtonGroupLogged({ handleLogout }: HandleLogoutType) {
+export default function ButtonGroupLogged({ handleLogout }: HandleLogoutProps) {
   return (
     <>
       <Button asChild size="lg" variant="default">

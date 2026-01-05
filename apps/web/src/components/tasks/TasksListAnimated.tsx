@@ -9,7 +9,11 @@ const styles = {
   itemTasks: "w-full h-full flex justify-center",
 };
 
-export default function TasksListAnimated({ tasks }: { tasks: TaskItem[] }) {
+type TasksListAnimatedProps = {
+  tasks: TaskItem[];
+};
+
+export default function TasksListAnimated({ tasks }: TasksListAnimatedProps) {
   return (
     <motion.ul
       variants={optionsAnimate.variants.containerVariants}

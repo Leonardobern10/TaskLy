@@ -11,11 +11,13 @@ const styles = {
     "grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-20 max-md:place-items-start",
 };
 
+type TasksContainerFiltersProps = {
+  searchTitle: string;
+};
+
 export default function TasksContainerFilters({
   searchTitle,
-}: {
-  searchTitle: string;
-}) {
+}: TasksContainerFiltersProps) {
   const { handleReset, control } = useTasksContainer({ searchTitle });
 
   return (

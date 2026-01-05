@@ -19,6 +19,7 @@ const styles = {
   containerInput: "grid gap-4 pt-4",
   button: "cursor-pointer",
 };
+
 type CreateCommentDialogProps = {
   id: string;
 };

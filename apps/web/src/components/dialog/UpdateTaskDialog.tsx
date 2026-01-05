@@ -32,7 +32,11 @@ const styles = {
   button: "text-primary",
 };
 
-export default function UpdateTaskDialog({ task }: { task: TaskItem }) {
+type UpdateTaskDialogProps = {
+  task: TaskItem;
+};
+
+export default function UpdateTaskDialog({ task }: UpdateTaskDialogProps) {
   const { handleSubmit, control, onSubmit, errors, reset, users } =
     useUpdateTaskDialog(task);
 
