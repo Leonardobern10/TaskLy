@@ -5,12 +5,30 @@ import { toast } from "sonner"; // shadcn
 import { useRouter } from "@tanstack/react-router";
 
 export function useNotifications() {
-  const token = useAuthStore((s) => s.token);
-  const user = useAuthStore((s) => s.user);
-  const lastEvent = useWebSocketStore((s) => s.lastEvent);
-  const connect = useWebSocketStore((s) => s.connect);
-  const disconnect = useWebSocketStore((s) => s.disconnect);
+  const { token, user } = useAuthStore();
+  const { lastEvent, connect, disconnect } = useWebSocketStore();
   const router = useRouter();
+
+  const roadToTask = (
+    msg: string,
+    label: string,
+    lastEvent: {
+      type: string;
+      payload: any;
+    }
+  ) => {
+    console.log(lastEvent);
+    toast(msg, {
+      action: {
+        label: label,
+        onClick: () =>
+          router.navigate({
+            to: "/tasks/$id",
+            params: { id: lastEvent.payload.id ?? lastEvent.payload.taskId },
+          }),
+      },
+    });
+  };
 
   // conecta no websocket quando logado
   useEffect(() => {
@@ -31,25 +49,32 @@ export function useNotifications() {
     switch (lastEvent.type) {
       case "tasks.created":
         console.log(lastEvent);
-        toast("Nova tarefa criada!", {
+        roadToTask("Nova tarefa criada!", "Verificar", lastEvent);
+        break;
+      case "tasks.updated":
+        console.log(lastEvent);
+        toast("Tarefa atualizada!", {
           action: {
             label: "Verificar",
             onClick: () =>
               router.navigate({
                 to: "/tasks/$id",
-                params: { id: lastEvent.payload.id },
+                params: { id: lastEvent.payload.taskId },
               }),
           },
         });
         break;
-      case "tasks.updated":
-        toast.info("Tarefa atualizada!", {
-          description: lastEvent.payload.title,
-        });
-        break;
       case "comment.new":
-        toast.message("Novo comentário recebido!", {
-          description: lastEvent.payload.text,
+        console.log("Comentario criado", lastEvent);
+        toast("Novo comentário criado!", {
+          action: {
+            label: "Verificar",
+            onClick: () =>
+              router.navigate({
+                to: "/tasks/$id",
+                params: { id: lastEvent.payload.taskId },
+              }),
+          },
         });
         break;
     }

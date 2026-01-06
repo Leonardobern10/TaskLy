@@ -11,6 +11,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   limit: 15,
   meta: null,
   filters: {},
+  comments: [],
 
   setFilters: (newFilters) => {
     set((state) => ({
@@ -44,7 +45,8 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   fetchTaskById: async (id) => {
     set({ loading: true });
     const data: TaskItem | null = await fetchTaskById(id);
-    set({ taskById: data, loading: false });
+    set({ taskById: data, loading: false, comments: data?.comments ?? [] });
+    console.log(get().comments);
   },
 
   clearFilters: () => {
@@ -54,7 +56,13 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
 
   updateTaskById: async (id, payload) => {
     set({ loading: true });
+
     const updated = await updateTask(id, payload);
-    set({ taskById: updated, loading: false });
+
+    set((state) => ({
+      taskById: updated,
+      tasks: state.tasks.map((t) => (t.id === id ? updated : t)),
+      loading: false,
+    }));
   },
 }));

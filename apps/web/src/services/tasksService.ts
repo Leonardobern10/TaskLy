@@ -42,6 +42,8 @@ export const saveTask = async (data: CreateTaskSchemaType) => {
 };
 
 export const updateTask = async (id: string, data: UpdateTaskSchemaType) => {
+  console.log(data);
   const response = await api.patch(`/tasks/${id}`, data);
+  console.log(response.data);
   return response.data;
 };

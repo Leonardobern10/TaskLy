@@ -13,7 +13,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 export const useUpdateTaskDialog = (task: TaskItem) => {
-  const { updateTaskById } = useTaskStore();
+  const { updateTaskById, taskById } = useTaskStore();
   const {
     handleSubmit,
     control,
@@ -22,25 +22,41 @@ export const useUpdateTaskDialog = (task: TaskItem) => {
   } = useForm<UpdateTaskSchemaType>({
     resolver: zodResolver(UpdateTaskSchema),
     defaultValues: {
-      title: task.title,
-      description: task.description,
-      priority: task.priority,
-      status: task.status,
-      dueDate: task.dueDate ? new Date(task.dueDate) : new Date(), // apenas a data
+      title: taskById?.title ?? task.title,
+      description: taskById?.description ?? task.description,
+      priority: taskById?.priority ?? task.priority,
+      status: taskById?.status ?? task.status,
+      dueDate: taskById?.dueDate
+        ? new Date(taskById.dueDate)
+        : task.dueDate
+          ? new Date(task.dueDate)
+          : new Date(),
+      assignedEmails: taskById?.assignedEmails ?? task.assignedEmails ?? [],
     },
   });
+
   const { user } = useAuthStore();
   const { users } = useUsersStore();
   const router = useRouter();
 
   useEffect(() => {
     if (!user) {
-      router.navigate({ from: "/auth/login" });
+      router.navigate({ to: "/auth/login" });
+      return;
     }
-  }, [user]);
+    if (taskById) {
+      reset({
+        title: taskById.title,
+        description: taskById.description,
+        priority: taskById.priority,
+        status: taskById.status,
+        dueDate: taskById.dueDate ? new Date(taskById.dueDate) : new Date(),
+        assignedEmails: taskById.assignedEmails ?? [],
+      });
+    }
+  }, [taskById, user]);
 
   const onSubmit: SubmitHandler<UpdateTaskSchemaType> = async (data) => {
-    console.log("Dados atualizados: ", data);
     await updateTaskById(task.id, data);
     reset();
     toast.success("Tarefa atualizada com sucesso!");

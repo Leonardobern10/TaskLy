@@ -3,7 +3,7 @@ import { chooseColor } from "@/utils/getPriorityColor";
 import { useEffect, useMemo } from "react";
 
 export const useTasksDetails = (id: string) => {
-  const { fetchTaskById, taskById, loading } = useTaskStore();
+  const { fetchTaskById, taskById, loading, comments } = useTaskStore();
 
   const color = useMemo(() => {
     if (!taskById) return null;
@@ -15,7 +15,7 @@ export const useTasksDetails = (id: string) => {
       await fetchTaskById(id);
     };
     getTask();
-  }, [id]);
+  }, [id, comments, taskById]);
 
-  return { taskById, loading, color };
+  return { taskById, loading, color, comments };
 };

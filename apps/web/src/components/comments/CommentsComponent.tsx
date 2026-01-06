@@ -14,10 +14,12 @@ export default function CommentsComponent({
   text,
 }: Comments) {
   return (
-    <div key={id} className={style.containerComment}>
-      <CommentBody text={text} author={author!} />
-      <CommentTime createdAt={createdAt} />
+    <>
+      <div key={id} className={style.containerComment}>
+        <CommentBody text={text} author={author!} />
+        <CommentTime createdAt={createdAt} />
+      </div>
       <Separator />
-    </div>
+    </>
   );
 }

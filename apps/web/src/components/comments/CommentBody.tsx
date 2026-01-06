@@ -3,7 +3,7 @@ import CommentAuthor from "./CommentAuthor";
 import CommentText from "./CommentText";
 
 const styles = {
-  commentContainer: "flex flex-col gap-y-4 w-full text-sm",
+  commentContainer: "flex flex-col gap-y-1 w-full text-sm",
   commentContent: "flex items-center gap-x-1",
   containerIcon: "p-1",
 };

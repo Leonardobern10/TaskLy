@@ -57,7 +57,7 @@ export default function UpdateTaskDialog({ task }: UpdateTaskDialogProps) {
         </DialogHeader>
 
         {/* FORM */}
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <ContainerInputDialog
             children={
               <ControllerInputForm
@@ -143,9 +143,7 @@ export default function UpdateTaskDialog({ task }: UpdateTaskDialogProps) {
               </Button>
             </DialogClose>
 
-            <Button type="submit" onClick={handleSubmit(onSubmit)}>
-              {updateTaskDialogData.buttonSave}
-            </Button>
+            <Button type="submit">{updateTaskDialogData.buttonSave}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

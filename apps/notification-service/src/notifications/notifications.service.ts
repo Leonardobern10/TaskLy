@@ -44,8 +44,8 @@ export class NotificationsService {
 
       // Eventos de comentário enviam apenas para usuários atribuídos
       if (type === 'comment.new') {
-        const recipients = data.assignedEmails.filter(
-          (email) => email !== data.author,
+        const recipients = (data.assignedEmails ?? []).filter(
+          (email: string) => email !== data.author,
         );
         return this.gateway.broadcastToClient(
           'comment.new',

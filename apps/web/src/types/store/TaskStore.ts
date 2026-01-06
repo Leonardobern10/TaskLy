@@ -2,6 +2,7 @@ import type { UpdateTaskSchemaType } from "@/schema/UpdateTaskSchema";
 import type { MetaType } from "../MetaType";
 import type { TaskItem } from "../TaskItem";
 import type { TaskFilters } from "./TaskFilters";
+import type { Comments } from "../CommentsType";
 
 export type TaskStore = {
   tasks: TaskItem[];
@@ -11,6 +12,7 @@ export type TaskStore = {
   limit: number;
   meta: MetaType | null;
   filters: TaskFilters;
+  comments: Comments[] | [];
 
   setFilters: (filters: Partial<TaskFilters>) => void;
   clearFilters: () => void;
