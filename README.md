@@ -1,6 +1,8 @@
-# 🏝️ Desafio JungleGaming
+# 🏝️ TaskLy - Sistema de Gestão de Tarefas
 
-Este é o código fonte da solução para o desafio JungleGaming — uma arquitetura **monorepo em TypeScript** com microserviços em NestJS, comunicação via mensageria e suporte a várias features como autenticação, tasks, comentários e notificações em tempo real.
+Sistema de Gestão de Tarefas colaborativas — uma arquitetura **monorepo em TypeScript** com microserviços em NestJS, comunicação via mensageria e suporte a várias features como autenticação, tasks, comentários e notificações em tempo real.
+
+Melhorias serão continuadas na branch `updates`.
 
 ## 📁 Estrutura do Repositório
 
