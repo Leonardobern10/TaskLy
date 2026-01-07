@@ -1,5 +1,4 @@
 import { RpcException } from '@nestjs/microservices';
-import { relativeTimeThreshold } from 'moment';
 
 export default class ServicesException extends RpcException {
   public readonly statusCode: number;

@@ -1,4 +1,4 @@
-import { Body, Controller, Param } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './entities/dto/create-task.dto';
 import { UpdateTaskDto } from './entities/dto/update-task.dto';
