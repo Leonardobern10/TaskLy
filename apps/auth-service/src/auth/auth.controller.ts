@@ -32,6 +32,7 @@ export class AuthController implements InterfaceAuthController {
    */
   @MessagePattern('auth.refresh')
   async refresh(@Payload() data: RefreshDto): Promise<any> {
+    console.log('Refresh chamado!');
     return this.authService.refresh(data);
   }
 

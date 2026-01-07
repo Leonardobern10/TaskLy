@@ -123,6 +123,7 @@ export class AuthController implements InterfaceAuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ): Promise<ResponseRefresh | Response> {
+    this.logger.log('Refresh chamado');
     const token = req.cookies?.refresh_token;
     const result = await lastValueFrom(
       this.authService.send('auth.refresh', { refresh_token: token }),
