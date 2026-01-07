@@ -16,7 +16,7 @@ export const cardHomepageData: CardHomepage[] = [
 ];
 
 export const homepageHeading: CardHomepage = {
-  title: "Sistema de Gestão de Tarefas",
+  title: "TaskLy",
   description:
     " Organize suas tarefas, acompanhe seu progresso e aumente sua produtividade.",
 };
