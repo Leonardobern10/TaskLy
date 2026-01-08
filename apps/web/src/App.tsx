@@ -4,7 +4,7 @@ import { useWebSocketStore } from "./store/websocket";
 import { useEffect } from "react";
 import { useNotifications } from "./hooks/useNotifications";
 import Header from "./components/header/Header";
-import { Spinner } from "./components/ui/spinner";
+import HomeSkeleton from "./components/skeletons/HomeSkeleton";
 
 function App() {
   const { user, token, initAuth, loading } = useAuthStore();
@@ -23,7 +23,7 @@ function App() {
     <div className="flex flex-col justify-center items-center w-full h-full">
       <Header />
       <div className="h-full w-full py-8">
-        {loading ? <Spinner /> : <Outlet />}
+        {loading ? <HomeSkeleton /> : <Outlet />}
       </div>
     </div>
   );
