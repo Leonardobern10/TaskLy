@@ -5,8 +5,10 @@ import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
 import { LoggerModule } from 'nestjs-pino';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
+import { MetricsModule } from './observability/metrics.module';
+import { HttpMetricsInterceptor } from './observability/http-metrics.interceptor';
 
 @Module({
   imports: [
@@ -35,6 +37,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     AuthModule,
     TasksModule,
+    MetricsModule,
   ],
   controllers: [AppController],
   providers: [
@@ -42,6 +45,10 @@ import { ConfigModule } from '@nestjs/config';
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: HttpMetricsInterceptor,
     },
   ],
 })
