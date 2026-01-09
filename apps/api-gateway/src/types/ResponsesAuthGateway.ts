@@ -1,4 +1,3 @@
-import { Task } from 'src/entities/Task';
 type UserResponse = {
   id: string;
   email: string;

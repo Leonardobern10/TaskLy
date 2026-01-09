@@ -1,10 +1,7 @@
 import { Request } from 'express';
 import { Comment } from 'src/entities/Comment';
-import { CreateCommentDto } from 'src/entities/dto/CreateCommentDto';
 import { CreateTaskDto } from 'src/entities/dto/CreateTaskDto.dto';
 import { UpdateTaskDto } from 'src/entities/dto/UpdateTaskDto.dto';
-import { TaskPriority } from 'src/entities/enum/TaskPriority';
-import { TaskStatus } from 'src/entities/enum/TaskStatus';
 import { Task } from 'src/entities/Task';
 import { FindTasksQueryDto } from 'src/types/FindTasksQueryDTO';
 import { ResponseTasksFindAll } from 'src/types/ReturnTasksGateway';

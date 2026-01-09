@@ -6,7 +6,7 @@ import { buttonData } from "@/data/button.data";
 export default function ButtonGroupUnLogged() {
   return (
     <>
-      <Button asChild variant="outline" size="lg">
+      <Button asChild variant="default" size="lg">
         <Link to={PATH.LOGIN}>{buttonData.login}</Link>
       </Button>
 

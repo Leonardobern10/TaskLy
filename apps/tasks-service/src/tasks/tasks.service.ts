@@ -6,12 +6,9 @@ import { CreateTaskDto } from './entities/dto/create-task.dto';
 import { UpdateTaskDto } from './entities/dto/update-task.dto';
 import { TaskHistory } from 'src/tasks-history/entities/task-history.entity';
 import { Logger } from 'nestjs-pino';
-import CreateResponse from 'src/utils/response.utils';
 import { PaginationDto } from 'src/utils/pagination.dto';
 import { ClientProxy } from '@nestjs/microservices';
-import { ResponsePaginatedDto } from 'src/utils/response-paginated.dto';
 import { OrderParams } from 'types/OrderParams';
-import { messagePatterns } from 'src/utils/messagePatterns';
 
 /**
  * Serviço responsável pelas regras de negócio relacionadas às Tasks.

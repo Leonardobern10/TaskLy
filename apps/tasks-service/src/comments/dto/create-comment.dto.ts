@@ -1,4 +1,4 @@
-import { isEmail, IsEmail, isString, IsString, IsUUID } from 'class-validator';
+import { IsEmail, IsString, IsUUID } from 'class-validator';
 
 export class CreateCommentDto {
   @IsUUID()

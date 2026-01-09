@@ -1,4 +1,4 @@
-import { Controller, Req } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RefreshDto } from './dto/refresh.dto';
@@ -32,6 +32,7 @@ export class AuthController implements InterfaceAuthController {
    */
   @MessagePattern('auth.refresh')
   async refresh(@Payload() data: RefreshDto): Promise<any> {
+    console.log('Refresh chamado!');
     return this.authService.refresh(data);
   }
 

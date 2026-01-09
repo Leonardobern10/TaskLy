@@ -1,10 +1,8 @@
 import {
   BadRequestException,
-  HttpException,
   HttpStatus,
   Inject,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
@@ -17,7 +15,6 @@ import { ResponseAuthLogout } from 'src/types/ResponseAuthLogout';
 import { UserEntity } from 'src/users/user.entity';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { STATUS_CODES } from 'http';
 
 /**
  * Serviço responsável por toda a lógica de autenticação, incluindo login,
@@ -84,7 +81,6 @@ export class AuthService {
       const hashedRefresh = await bcrypt.hash(refreshToken, 10);
       await this.usersService.updateRefreshToken(user.id, hashedRefresh);
       this.logger.log(`Login realizado com sucesso para ${email}!`);
-
       return {
         access_token: accessToken,
         refresh_token: refreshToken,

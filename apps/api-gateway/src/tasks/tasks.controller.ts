@@ -22,12 +22,10 @@ import {
   ApiOperation,
   ApiParam,
   ApiQuery,
-  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { Logger } from 'nestjs-pino';
 import { lastValueFrom } from 'rxjs';
-import { CreateCommentDto } from 'src/entities/dto/CreateCommentDto';
 import { CreateTaskDto } from 'src/entities/dto/CreateTaskDto.dto';
 import { UpdateTaskDto } from 'src/entities/dto/UpdateTaskDto.dto';
 import { TaskPriority } from 'src/entities/enum/TaskPriority';
@@ -35,7 +33,6 @@ import { TaskStatus } from 'src/entities/enum/TaskStatus';
 import { IntefaceTasksController } from 'src/interfaces/InterfaceTasksController';
 import { JwtAuthGuard } from 'src/jwt/jwt.guard';
 import { FindTasksQueryDto } from 'src/types/FindTasksQueryDTO';
-import { OrderParams } from 'src/types/OrderParams';
 
 /**
  * Controller responsável por gerenciar tarefas e seus comentários.
