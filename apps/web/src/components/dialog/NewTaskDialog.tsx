@@ -38,9 +38,13 @@ export default function NewTaskDialog() {
 
   return (
     <Dialog>
-      <form>
+      <form className="w-full">
         <DialogTrigger asChild>
-          <Button variant="default">
+          <Button
+            className="w-full md:w-fit cursor-pointer"
+            size="lg"
+            variant="default"
+          >
             <LuPlus className={styles.buttonSpan} />
             <span className={styles.buttonSpan}>
               {newTaskDialogData.buttonNewTask}

@@ -29,7 +29,7 @@ const styles = {
   card: "relative border shadow-sm rounded-xl",
   cardAction: "absolute right-4 top-4",
   cardHeader: "pt-8 pb-4",
-  cardTitle: "text-2xl font-bold text-primary break-all",
+  cardTitle: "text-2xl md:text-2xl font-bold text-primary/80 break-all",
   cardDescription:
     "break-all mt-2 text-base text-muted-foreground line-clamp-3",
   cardContent: "py-6 flex flex-col gap-10",

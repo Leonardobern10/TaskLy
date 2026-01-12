@@ -1,8 +1,8 @@
 import { ALERTS } from "@/utils/alerts";
 
 const style = {
-  title: "text-muted-foreground pt-2",
-  value: "font-medium text-foreground",
+  title: "text-muted-foreground text-normal pt-2",
+  value: "font-normal text-foreground",
   alert: "text-neutral-700 font-medium",
 };
 

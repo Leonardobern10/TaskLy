@@ -27,6 +27,7 @@ export default function TasksContainerFilters({
         onClick={handleReset}
         buttonName={"Redefinir busca"}
         size="lg"
+        full
       />
 
       {/* Selects */}

@@ -1,20 +1,11 @@
 import { Outlet } from "@tanstack/react-router";
-import { useAuthStore } from "./store/useAuthStore";
-import { useWebSocketStore } from "./store/websocket";
-import { useEffect } from "react";
 import { useNotifications } from "./hooks/useNotifications";
 import Header from "./components/header/Header";
 import HomeSkeleton from "./components/skeletons/HomeSkeleton";
+import { useApp } from "./hooks/useApp";
 
 function App() {
-  const { user, token, initAuth, loading } = useAuthStore();
-  const connect = useWebSocketStore((s) => s.connect);
-
-  // conectar websocket
-  useEffect(() => {
-    initAuth();
-    if (token && user?.email) connect();
-  }, []);
+  const { loading } = useApp();
 
   // ativar toast hook
   useNotifications();

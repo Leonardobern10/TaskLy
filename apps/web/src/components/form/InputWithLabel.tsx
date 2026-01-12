@@ -8,7 +8,7 @@ type TextColor = "text-primary" | "text-secondary";
 const styles = (textColor: TextColor) => ({
   div: "flex flex-col justify-between w-full w-max-5/6 min-h-15",
   label: `text-sm ${textColor}`,
-  input: "text-xs",
+  input: "text-xs cursor-pointer",
 });
 
 export default function InputWithLabel({

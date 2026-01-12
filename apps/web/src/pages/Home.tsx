@@ -12,11 +12,12 @@ export default function Home() {
   return (
     <div className={homeStyles.homeContainer}>
       <div className={homeStyles.bodyContainer}>
-        <h1>{homepageHeading.title}</h1>
-
-        <p className={homeStyles.descriptionHomepage}>
-          {homepageHeading.description}
-        </p>
+        <div className={homeStyles.mainTexts}>
+          <h1>{homepageHeading.title}</h1>
+          <p className={homeStyles.descriptionHomepage}>
+            {homepageHeading.description}
+          </p>
+        </div>
 
         <div className={homeStyles.containerButtons}>
           {user ? (
@@ -26,7 +27,7 @@ export default function Home() {
           )}
         </div>
 
-        <div className={homeStyles.containerCards}>
+        <section className={homeStyles.containerCards}>
           {cardHomepageData.map((el: CardHomepage) => (
             <CardHomePage
               key={el.title}
@@ -34,7 +35,7 @@ export default function Home() {
               description={el.description}
             />
           ))}
-        </div>
+        </section>
       </div>
     </div>
   );
