@@ -5,7 +5,7 @@ export default function HeaderUnLogged() {
   return (
     <>
       <NavBarListItem name="Login" path={PATH.LOGIN} />
-      <NavBarListItem name="Cadastro" path={PATH.REGISTER} />
+      <NavBarListItem name="Cadastro" path={PATH.REGISTER} variant="outline" />
     </>
   );
 }

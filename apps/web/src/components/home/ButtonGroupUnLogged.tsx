@@ -6,11 +6,11 @@ import { buttonData } from "@/data/button.data";
 export default function ButtonGroupUnLogged() {
   return (
     <>
-      <Button asChild variant="default" size="lg">
+      <Button className="md:text-lg" asChild variant="default" size="lg">
         <Link to={PATH.LOGIN}>{buttonData.login}</Link>
       </Button>
 
-      <Button asChild variant="outline" size="lg">
+      <Button className="md:text-lg" asChild variant="outline" size="lg">
         <Link to={PATH.REGISTER}>{buttonData.register}</Link>
       </Button>
     </>

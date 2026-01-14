@@ -1,6 +1,7 @@
 const styles = {
   div: "card-homepage",
-  p: "text-sm text-gray-500 mt-2",
+  p: "text-body text-gray-500 mt-2",
+  h3: "text-purple",
 };
 
 type CardHomePageProps = {
@@ -14,7 +15,7 @@ export default function CardHomePage({
 }: CardHomePageProps) {
   return (
     <article className={styles.div}>
-      <h3>{title}</h3>
+      <h3 className={styles.h3}>{title}</h3>
       <p className={styles.p}>{description}</p>
     </article>
   );

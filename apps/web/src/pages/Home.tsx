@@ -1,3 +1,4 @@
+import { stylesLogo } from "@/components/header/styles.logo";
 import ButtonGroupLogged from "@/components/home/ButtonGroupLogged";
 import ButtonGroupUnLogged from "@/components/home/ButtonGroupUnLogged";
 import CardHomePage from "@/components/home/CardHomepage";
@@ -13,7 +14,7 @@ export default function Home() {
     <div className={homeStyles.homeContainer}>
       <div className={homeStyles.bodyContainer}>
         <div className={homeStyles.mainTexts}>
-          <h1>{homepageHeading.title}</h1>
+          <h1 className={stylesLogo.main}>{homepageHeading.title}</h1>
           <p className={homeStyles.descriptionHomepage}>
             {homepageHeading.description}
           </p>

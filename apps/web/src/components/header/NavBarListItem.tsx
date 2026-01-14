@@ -1,16 +1,18 @@
 import type { NavBarListItemProps } from "@/types/props/NavBarListItemProps";
-import { Link } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router";
+import { Button } from "../ui/button";
 
-const styles = {
-  link: "text-md font-light text-secondary",
-};
-
-export default function NavBarListItem({ name, path }: NavBarListItemProps) {
+export default function NavBarListItem({
+  name,
+  path,
+  variant = "default",
+}: NavBarListItemProps) {
+  const router = useRouter();
   return (
     <li>
-      <Link className={styles.link} to={path}>
+      <Button variant={variant} onClick={() => router.navigate({ to: path })}>
         {name}
-      </Link>
+      </Button>
     </li>
   );
 }

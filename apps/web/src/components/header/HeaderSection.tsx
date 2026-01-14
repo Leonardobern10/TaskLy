@@ -4,9 +4,8 @@ import { Link } from "@tanstack/react-router";
 
 const styles = {
   div: "header-section text-primary",
-  h1: "text-2xl",
-  p: "text-xs",
-  em: "text-blue-500",
+  p: "text-sm md:text-lg text-center",
+  em: "text-purple",
 };
 
 export default function HeaderSection({
@@ -16,7 +15,7 @@ export default function HeaderSection({
 }: HeaderSectionProps) {
   return (
     <div className={styles.div}>
-      <h1 className={styles.h1}>{title}</h1>
+      <h2>{title}</h2>
       <p className={styles.p}>
         {text}{" "}
         <em className={styles.em}>

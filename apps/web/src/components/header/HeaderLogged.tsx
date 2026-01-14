@@ -11,7 +11,9 @@ export default function HeaderLogged({ handleLogout }: HeaderLoggedProps) {
   return (
     <>
       <NavBarListItem name="Tasks" path={PATH.DASHBOARD} />
-      <Button onClick={handleLogout}>{buttonData.logoutButton}</Button>
+      <Button variant="outline" onClick={handleLogout}>
+        {buttonData.logoutButton}
+      </Button>
     </>
   );
 }

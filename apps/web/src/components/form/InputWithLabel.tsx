@@ -6,9 +6,9 @@ import TextError from "../TextError";
 type TextColor = "text-primary" | "text-secondary";
 
 const styles = (textColor: TextColor) => ({
-  div: "flex flex-col justify-between w-full w-max-5/6 min-h-15",
-  label: `text-sm ${textColor}`,
-  input: "text-xs cursor-pointer",
+  div: "flex flex-col justify-between w-full gap-y-2 w-max-5/6 min-h-15",
+  label: `text-sm md:text-lg ${textColor}`,
+  input: "text-xs md:text-sm cursor-pointer",
 });
 
 export default function InputWithLabel({

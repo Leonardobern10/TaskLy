@@ -11,7 +11,7 @@ const styles = {
   containerAuth: "container-auth",
   bodyAuth: "body-auth",
   formAuth: "form-auth",
-  button: "w-full mt-2 cursor-pointer",
+  button: "w-full mt-2 cursor-pointer font-semibold md:text-lg md:w-fit",
 };
 
 export default function Register() {
