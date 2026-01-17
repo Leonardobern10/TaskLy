@@ -22,7 +22,7 @@ export default function SelectForm<
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>{label}</SelectLabel>
+          {label && <SelectLabel>{label}</SelectLabel>}
           {values.map((el: SelectType<T>) => (
             <SelectItem key={el.name} value={el.value}>
               {el.name}

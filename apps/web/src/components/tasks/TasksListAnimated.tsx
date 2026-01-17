@@ -13,15 +13,17 @@ type TasksListAnimatedProps = {
   tasks: TaskItem[];
 };
 
+const ulAminated = {
+  variants: optionsAnimate.variants.containerVariants,
+  initial: "hidden",
+  animate: "visible",
+  viewport: { once: true, margin: "-100px" },
+  className: styles.listTasks,
+};
+
 export default function TasksListAnimated({ tasks }: TasksListAnimatedProps) {
   return (
-    <motion.ul
-      variants={optionsAnimate.variants.containerVariants}
-      initial="hidden"
-      animate="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      className={styles.listTasks}
-    >
+    <motion.ul {...ulAminated}>
       {tasks.map((task: TaskItem) => (
         <motion.li
           key={task.id}

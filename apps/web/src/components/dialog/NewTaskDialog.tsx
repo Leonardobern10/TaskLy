@@ -38,7 +38,7 @@ export default function NewTaskDialog() {
 
   return (
     <Dialog>
-      <form className="w-full">
+      <form className="w-fit">
         <DialogTrigger asChild>
           <Button
             className="w-full md:w-fit cursor-pointer"

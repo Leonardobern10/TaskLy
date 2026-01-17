@@ -1,15 +1,14 @@
 import type { ChangeEvent } from "react";
-import NewTaskDialog from "../dialog/NewTaskDialog";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 
 const styles = {
   dashboardContainer:
     "flex flex-col sm:flex-row items-center justify-between gap-4 border rounded-xl px-10 py-4 shadow-sm",
-  dashboardContent: "relative w-full sm:max-w-sm",
+  dashboardContent: "relative w-full",
   search:
     "absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground",
-  input: "pl-10",
+  input: "pl-10 w-full",
 };
 
 const dataComponent = {
@@ -28,7 +27,6 @@ export default function DashboardBody({
 }: DashboardBodyProps) {
   return (
     <section className={styles.dashboardContainer}>
-      <NewTaskDialog />
       <div className={styles.dashboardContent}>
         <Search className={styles.search} />
         <Input
