@@ -1,6 +1,8 @@
-import { useState, type ChangeEvent } from "react";
+import { useTaskStore } from "@/store/useTaskStore";
+import { useEffect, useState, type ChangeEvent } from "react";
 
 export const useDashboard = () => {
+  const { tasksStatus, getTasksStatus } = useTaskStore();
   const [searchTitle, setSearchTitle] = useState("");
   const today = new Date();
   const formattedDay = today.toLocaleDateString("pt-BR", {
@@ -14,5 +16,9 @@ export const useDashboard = () => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSearchTitle(e.target.value);
 
-  return { formattedDate, formattedDay, searchTitle, onChange };
+  useEffect(() => {
+    getTasksStatus();
+  }, []);
+
+  return { formattedDate, formattedDay, searchTitle, onChange, tasksStatus };
 };

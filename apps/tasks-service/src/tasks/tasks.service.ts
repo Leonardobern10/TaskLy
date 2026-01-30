@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CreateTaskDto } from './entities/dto/create-task.dto';
 import { UpdateTaskDto } from './entities/dto/update-task.dto';
 import { TaskHistory } from 'src/tasks-history/entities/task-history.entity';
@@ -9,6 +9,9 @@ import { Logger } from 'nestjs-pino';
 import { PaginationDto } from 'src/utils/pagination.dto';
 import { ClientProxy } from '@nestjs/microservices';
 import { OrderParams } from 'types/OrderParams';
+import { TaskStatus } from './entities/enum/taskStatus.enum';
+import { StatusTaskResponse } from 'types/StatusTaskResponse';
+import { Between } from 'typeorm';
 
 /**
  * Serviço responsável pelas regras de negócio relacionadas às Tasks.
@@ -188,5 +191,39 @@ export class TasksService {
       task: { id: taskId },
     });
     return this.historyRepo.save(history);
+  }
+
+  async statusTasks(): Promise<StatusTaskResponse> {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const result = await this.taskRepo
+      .createQueryBuilder('task')
+      .select([
+        'COUNT(*) as "totalTasks"',
+        `COUNT(CASE WHEN task.status = :done THEN 1 END) as "totalTasksDone"`,
+        `COUNT(CASE WHEN task.status <> :done THEN 1 END) as "totalTasksNotDone"`,
+        `COUNT(CASE WHEN task.dueDate BETWEEN :start AND :end THEN 1 END) as "tasksToday"`,
+        `COUNT(CASE WHEN task.dueDate BETWEEN :start AND :end AND task.status = :done THEN 1 END) as "tasksTodayDone"`,
+        `COUNT(CASE WHEN task.dueDate BETWEEN :start AND :end AND task.status <> :done THEN 1 END) as "tasksTodayNotDone"`,
+      ])
+      .setParameters({
+        done: TaskStatus.DONE,
+        start: startOfDay,
+        end: endOfDay,
+      })
+      .getRawOne();
+
+    return {
+      totalTasks: Number(result.totalTasks),
+      totalTasksDone: Number(result.totalTasksDone),
+      totalTasksNotDone: Number(result.totalTasksNotDone),
+      tasksToday: Number(result.tasksToday),
+      tasksTodayDone: Number(result.tasksTodayDone),
+      tasksTodayNotDone: Number(result.tasksTodayNotDone),
+    };
   }
 }
