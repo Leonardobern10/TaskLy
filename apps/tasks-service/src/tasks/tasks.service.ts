@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
-import { Not, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateTaskDto } from './entities/dto/create-task.dto';
 import { UpdateTaskDto } from './entities/dto/update-task.dto';
 import { TaskHistory } from 'src/tasks-history/entities/task-history.entity';
@@ -203,12 +203,30 @@ export class TasksService {
     const result = await this.taskRepo
       .createQueryBuilder('task')
       .select([
-        'COUNT(*) as "totalTasks"',
-        `COUNT(CASE WHEN task.status = :done THEN 1 END) as "totalTasksDone"`,
-        `COUNT(CASE WHEN task.status <> :done THEN 1 END) as "totalTasksNotDone"`,
-        `COUNT(CASE WHEN task.dueDate BETWEEN :start AND :end THEN 1 END) as "tasksToday"`,
-        `COUNT(CASE WHEN task.dueDate BETWEEN :start AND :end AND task.status = :done THEN 1 END) as "tasksTodayDone"`,
-        `COUNT(CASE WHEN task.dueDate BETWEEN :start AND :end AND task.status <> :done THEN 1 END) as "tasksTodayNotDone"`,
+        `COUNT(*) AS "totalTasks"`,
+
+        `COUNT(*) FILTER (WHERE task.status = :done)
+        AS "totalTasksDone"`,
+
+        `COUNT(*) FILTER (WHERE task.status <> :done)
+        AS "totalTasksNotDone"`,
+
+        `COUNT(*) FILTER (
+        WHERE task."dueDate" >= :start
+          AND task."dueDate" <= :end
+      ) AS "tasksToday"`,
+
+        `COUNT(*) FILTER (
+        WHERE task."dueDate" >= :start
+          AND task."dueDate" <= :end
+          AND task.status = :done
+      ) AS "tasksTodayDone"`,
+
+        `COUNT(*) FILTER (
+        WHERE task."dueDate" >= :start
+          AND task."dueDate" <= :end
+          AND task.status <> :done
+      ) AS "tasksTodayNotDone"`,
       ])
       .setParameters({
         done: TaskStatus.DONE,
