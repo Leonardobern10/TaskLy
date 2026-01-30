@@ -15,7 +15,7 @@ import type { ColorFormat } from "@/types/ColorFormat";
 import { PATH } from "@/utils/path";
 
 const styles = (color: ColorFormat) => ({
-  card: `flex transition-all w-5/6 duration-200 hover:shadow-md hover:scale-[1.01] cursor-pointer border border-border/60 rounded-xl ${color.shadow}`,
+  card: `flex transition-all w-5/6 duration-200 hover:shadow-md hover:scale-[1.01] cursor-pointer rounded-xl ${color.shadow}`,
   cardHeader: "pb-2",
   cardTitle: "text-base font-semibold tracking-tight break-all",
   cardDescription: "text-sm text-muted-foreground mt-1 line-clamp-2 break-all",
@@ -36,6 +36,7 @@ export default function TaskComponent({
 }: TaskItem) {
   const color = chooseColor(priority);
   const stylesCustom = styles(color);
+  const renderTitle = title.length > 25 ? title.slice(0, 25) + "..." : title;
 
   return (
     <Card className={stylesCustom.card}>
@@ -47,7 +48,9 @@ export default function TaskComponent({
         <CardHeader className={stylesCustom.cardHeader}>
           <div className={stylesCustom.containerTitle}>
             <GrTask className={stylesCustom.icon} />
-            <CardTitle className={stylesCustom.cardTitle}>{title}</CardTitle>
+            <CardTitle className={stylesCustom.cardTitle}>
+              {renderTitle}
+            </CardTitle>
           </div>
           {description && (
             <CardDescription className={stylesCustom.cardDescription}>
