@@ -12,7 +12,9 @@ function App() {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full">
-      <Header />
+      {/**
+       * <Header />
+       */}
       <div className="h-full w-full py-8">
         {loading ? <HomeSkeleton /> : <Outlet />}
       </div>
