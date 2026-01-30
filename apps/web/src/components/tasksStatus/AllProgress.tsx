@@ -4,7 +4,7 @@ import { Separator } from "../ui/separator";
 
 export default function AllProgress({ status }: { status: StatusType[] }) {
   return (
-    <div className="flex flex-row w-full px-6 gap-x-4 border-2 border-neutral-400/20 shadow-2xs rounded-2xl">
+    <div className="flex flex-row w-full">
       {status.map((el: StatusType, index) => (
         <div className="flex flex-row justify-between h-full items-center gap-x-4">
           <TotalTasksStatus
@@ -14,7 +14,7 @@ export default function AllProgress({ status }: { status: StatusType[] }) {
           {index !== status.length - 1 && (
             <Separator
               orientation="vertical"
-              className="h-1 text-neutral-400/50 py-8"
+              className="h-10 bg-purple/50 py-8"
             />
           )}
         </div>

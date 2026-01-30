@@ -20,9 +20,14 @@ const buildTasksStatus = (
 
 export default function TasksStatus() {
   const { tasksStatus } = useDashboard();
+  const total = tasksStatus?.tasksToday ?? 0;
+  const done = tasksStatus?.tasksTodayDone ?? 0;
+  const currentProgress = total > 0 ? (done / total) * 100 : 0;
+
   return (
     <div className="flex flex-col w-full gap-y-8">
       <TodayProgress
+        currentProgress={currentProgress}
         status={buildTasksStatus(
           tasksStatus?.tasksToday,
           tasksStatus?.tasksTodayDone,
@@ -30,6 +35,8 @@ export default function TasksStatus() {
           4,
         )}
       />
+      {/**
+       * 
       <AllProgress
         status={buildTasksStatus(
           tasksStatus?.totalTasks,
@@ -38,6 +45,7 @@ export default function TasksStatus() {
           4,
         )}
       />
+       */}
     </div>
   );
 }
