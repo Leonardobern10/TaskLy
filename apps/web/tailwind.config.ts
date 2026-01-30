@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Noto Sans", "sans-serif"], // substituindo a fonte padrão
-        mono: ["Open Sans", "sans-serif"],
+        mono: ["Poppins", "sans-serif"],
       },
     },
   },

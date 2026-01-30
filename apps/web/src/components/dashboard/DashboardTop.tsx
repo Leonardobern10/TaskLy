@@ -1,6 +1,5 @@
 import TasksStatus from "../tasksStatus/TasksStatus";
 import TodayCalendar from "./TodayCalendar";
-import TodayTime from "./TodayTime";
 
 const styles = {
   container:
