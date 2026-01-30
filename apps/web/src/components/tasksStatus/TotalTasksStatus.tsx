@@ -6,10 +6,10 @@ export default function TotalTasksStatus({
 }: StatusType) {
   return (
     <div className="flex flex-col items-center justify-between font-sans h-full px-5 py-6 gap-y-4">
-      <p className="text-purple/90 text-md leading-1 text-shadow-2xs shadow-black">
+      <p className="text-md leading-1 text-shadow-2xs shadow-black">
         {statusName}
       </p>
-      <p className="text-purple/80 text-2xl font-bold">{statusValue}</p>
+      <p className="text-2xl font-bold">{statusValue}</p>
     </div>
   );
 }

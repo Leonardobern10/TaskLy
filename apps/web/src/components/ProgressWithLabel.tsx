@@ -13,7 +13,7 @@ export default function ProgressWithLabel({
   return (
     <Field className="w-full">
       <FieldLabel htmlFor="progress-tasks" className="font-medium text-lg">
-        <span>{label}</span>
+        <span className="text-xl">{label}</span>
         <span className="ml-auto">{Math.round(progressValue)}%</span>
       </FieldLabel>
       <Progress value={progressValue} id="progress-tasks" />

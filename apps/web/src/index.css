@@ -189,6 +189,6 @@
 
   /* Background */
   .background-nice {
-    @apply bg-linear-to-b from-purple/20 to-white border-2 border-purple/20 text-purple/80;
+    @apply bg-linear-to-b from-gray-300/20 to-white border-2 border-neutral-400/20 text-black/70;
   }
 }
