@@ -11,7 +11,6 @@ export default function DashboardTop() {
   return (
     <section className={styles.container}>
       <div className="flex flex-col">
-        <TodayTime />
         <TasksStatus />
       </div>
       <TodayCalendar />

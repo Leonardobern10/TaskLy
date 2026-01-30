@@ -171,7 +171,7 @@
 
   /* Auth */
   .container-auth {
-    @apply w-full h-full md:min-h-screen flex items-center justify-center bg-muted/40 px-4;
+    @apply w-full h-fit md:min-h-screen flex items-center justify-center bg-muted/40 px-4;
   }
   .form-auth {
     @apply flex flex-col items-center gap-6 md:gap-10 mt-6;
