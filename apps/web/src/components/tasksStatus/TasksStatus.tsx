@@ -4,37 +4,42 @@ import TodayProgress from "./TodayProgress";
 import { useDashboard } from "@/hooks/useDashboard";
 
 const buildTasksStatus = (
-  tarefaCadastrada?: number,
-  tarefaConcluida?: number,
-  tarefaNaoConcluida?: number,
-  tarefasAtrasadas?: number,
+  tarefaCadastrada: number,
+  tarefaConcluida: number,
+  tarefaNaoConcluida: number,
+  tarefasAtrasadas: number,
 ): StatusType[] => [
-  { statusName: "Tarefas cadastradas", statusValue: tarefaCadastrada || 0 },
-  { statusName: "Tarefas concluidas", statusValue: tarefaConcluida || 0 },
-  {
-    statusName: "Tarefas não concluídas",
-    statusValue: tarefaNaoConcluida || 0,
-  },
-  { statusName: "Tarefas atrasadas", statusValue: tarefasAtrasadas || 0 },
+  { statusName: "Tarefas cadastradas", statusValue: tarefaCadastrada },
+  { statusName: "Tarefas concluidas", statusValue: tarefaConcluida },
+  { statusName: "Tarefas não concluídas", statusValue: tarefaNaoConcluida },
+  { statusName: "Tarefas atrasadas", statusValue: tarefasAtrasadas },
 ];
 
 export default function TasksStatus() {
   const { tasksStatus } = useDashboard();
+  const {
+    totalTasks,
+    totalTasksDone,
+    totalTasksNotDone,
+    tasksToday,
+    tasksTodayDone,
+    tasksTodayNotDone,
+  } = tasksStatus!;
   return (
     <div className="flex flex-col w-full gap-y-8">
       <TodayProgress
         status={buildTasksStatus(
-          tasksStatus?.tasksToday,
-          tasksStatus?.tasksTodayDone,
-          tasksStatus?.tasksTodayNotDone,
+          tasksToday,
+          tasksTodayDone,
+          tasksTodayNotDone,
           4,
         )}
       />
       <AllProgress
         status={buildTasksStatus(
-          tasksStatus?.totalTasks,
-          tasksStatus?.totalTasksDone,
-          tasksStatus?.totalTasksNotDone,
+          totalTasks,
+          totalTasksDone,
+          totalTasksNotDone,
           4,
         )}
       />
