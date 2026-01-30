@@ -123,4 +123,9 @@ export class TasksController {
   findByTitle(@Payload() dto: PaginationDto) {
     return this.service.findAll(dto);
   }
+
+  @MessagePattern('tasks.tasksStatus')
+  findTasksStatus() {
+    return this.service.statusTasks();
+  }
 }

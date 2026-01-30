@@ -129,6 +129,11 @@ export class TasksController implements IntefaceTasksController {
     return lastValueFrom(this.taskService.send('tasks.findAll', query));
   }
 
+  @Get('/taskStatus')
+  async tasksStatus() {
+    return lastValueFrom(this.taskService.send('tasks.tasksStatus', {}));
+  }
+
   /**
    * Busca uma tarefa pelo seu ID.
    * @param {string} id - ID da tarefa.
@@ -165,6 +170,7 @@ export class TasksController implements IntefaceTasksController {
   async findOne(@Param('id') id: string) {
     return lastValueFrom(this.taskService.send('tasks.findOne', id));
   }
+
   /**
    * Atualiza uma tarefa existente.
    * @param {string} id - ID da tarefa.

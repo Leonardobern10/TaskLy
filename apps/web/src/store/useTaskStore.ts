@@ -1,5 +1,10 @@
 import { create } from "zustand";
-import { fetchTaskById, fetchTasks, updateTask } from "@/services/tasksService";
+import {
+  fetchTaskById,
+  fetchTasks,
+  getTasksStatus,
+  updateTask,
+} from "@/services/tasksService";
 import type { TaskStore } from "@/types/store/TaskStore";
 import type { TaskItem } from "@/types/TaskItem";
 
@@ -12,6 +17,7 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   meta: null,
   filters: {},
   comments: [],
+  tasksStatus: null,
 
   setFilters: (newFilters) => {
     set((state) => ({
@@ -64,5 +70,11 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
       tasks: state.tasks.map((t) => (t.id === id ? updated : t)),
       loading: false,
     }));
+  },
+
+  getTasksStatus: async () => {
+    console.log("getTasksStatus()  chamada!");
+    const response = await getTasksStatus();
+    set({ tasksStatus: { ...response } });
   },
 }));

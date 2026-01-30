@@ -1,3 +1,4 @@
+import { useWindowWidth } from "@/hooks/useWindowWidth";
 import {
   Pagination,
   PaginationContent,
@@ -19,6 +20,7 @@ const styles = {
 
 export default function PaginationComponent() {
   const dataPages = usePagination();
+  const width = useWindowWidth();
 
   return (
     <div className={styles.containerPagination}>
@@ -34,20 +36,21 @@ export default function PaginationComponent() {
           </PaginationItem>
 
           {/* NÚMEROS */}
-          {dataPages?.pagesArray.map((p) => (
-            <PaginationItem key={p}>
-              <PaginationLink
-                isActive={p === dataPages?.page}
-                onClick={() => dataPages.fetchTasks(p)}
-                className="cursor-pointer"
-              >
-                {p}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
+          {width > 768 &&
+            dataPages?.pagesArray.map((p) => (
+              <PaginationItem key={p}>
+                <PaginationLink
+                  isActive={p === dataPages?.page}
+                  onClick={() => dataPages.fetchTasks(p)}
+                  className="cursor-pointer"
+                >
+                  {p}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
 
           {/* ELLIPSIS (opcional caso tenha muitas páginas) */}
-          {dataPages?.totalPages! > 4 && <PaginationEllipsis />}
+          {dataPages?.totalPages! > 2 && <PaginationEllipsis />}
 
           {/* NEXT */}
           <PaginationItem>
@@ -56,7 +59,7 @@ export default function PaginationComponent() {
               onClick={dataPages?.handleNext}
               className={styles.handleNext(
                 dataPages?.page!,
-                dataPages?.totalPages!
+                dataPages?.totalPages!,
               )}
             />
           </PaginationItem>
