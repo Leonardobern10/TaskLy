@@ -1,43 +1,35 @@
-import type { StatusType } from "@/types/StatusType";
 import TodayProgress from "./TodayProgress";
-import { useDashboard } from "@/hooks/useDashboard";
 import { optionsAnimateDashboardTop } from "@/utils/animate";
 import { motion } from "motion/react";
+import type { StatusTaskResponse } from "@/types/StatusTaskResponse";
+import { buildTasksStatus } from "@/utils/buildTaskStatus";
 
-const buildTasksStatus = (
-  tarefaCadastrada?: number,
-  tarefaConcluida?: number,
-  tarefaNaoConcluida?: number,
-  tarefasAtrasadas?: number,
-): StatusType[] => [
-  { statusName: "Cadastradas", statusValue: tarefaCadastrada ?? 0 },
-  { statusName: "Concluidas", statusValue: tarefaConcluida ?? 0 },
-  {
-    statusName: "Não concluídas",
-    statusValue: tarefaNaoConcluida ?? 0,
-  },
-  { statusName: "Atrasadas", statusValue: tarefasAtrasadas ?? 0 },
-];
+type TaskStatusProps = {
+  status: StatusTaskResponse | null;
+};
+
+const styles = {
+  container: "flex flex-col w-full gap-y-8",
+};
 
 const currentProgress = (total: number = 0, done: number = 0) =>
   total > 0 ? (done / total) * 100 : 0;
 
-export default function TasksStatus() {
-  const { tasksStatus } = useDashboard();
-  const total = tasksStatus?.tasksToday;
-  const done = tasksStatus?.tasksTodayDone;
+export default function TasksStatus({ status }: TaskStatusProps) {
+  const total = status?.tasksToday;
+  const done = status?.tasksTodayDone;
 
   return (
     <motion.div
-      className="flex flex-col w-full gap-y-8"
+      className={styles.container}
       {...optionsAnimateDashboardTop(-600)}
     >
       <TodayProgress
         currentProgress={currentProgress(total, done)}
         status={buildTasksStatus(
-          tasksStatus?.tasksToday,
-          tasksStatus?.tasksTodayDone,
-          tasksStatus?.tasksTodayNotDone,
+          status?.tasksToday,
+          status?.tasksTodayDone,
+          status?.tasksTodayNotDone,
           4,
         )}
       />

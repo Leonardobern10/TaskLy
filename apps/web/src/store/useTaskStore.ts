@@ -73,7 +73,6 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   },
 
   getTasksStatus: async () => {
-    console.log("getTasksStatus()  chamada!");
     const response = await getTasksStatus();
     set({ tasksStatus: { ...response } });
   },
