@@ -17,7 +17,6 @@ export const useDashboard = () => {
     setSearchTitle(e.target.value);
 
   useEffect(() => {
-    console.log("Disparou useDashboard");
     getTasksStatus();
   }, []);
 

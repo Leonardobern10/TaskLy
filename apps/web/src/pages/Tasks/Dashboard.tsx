@@ -9,11 +9,11 @@ const styles = {
 };
 
 export default function Dashboard() {
-  const { searchTitle, onChange } = useDashboard();
+  const { searchTitle, onChange, tasksStatus } = useDashboard();
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <DashboardTop />
+        <DashboardTop status={tasksStatus} />
         <DashboardBody onChange={onChange} searchTitle={searchTitle} />
         <section>
           <TasksContainer searchTitle={searchTitle} />

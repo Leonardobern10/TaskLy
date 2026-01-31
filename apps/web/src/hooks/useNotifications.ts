@@ -15,7 +15,7 @@ export function useNotifications() {
     lastEvent: {
       type: string;
       payload: any;
-    }
+    },
   ) => {
     console.log(lastEvent);
     toast(msg, {
@@ -32,14 +32,16 @@ export function useNotifications() {
 
   // conecta no websocket quando logado
   useEffect(() => {
-    if (token && user?.email) {
-      connect();
-      return () => disconnect();
-    } else {
+    if (!token || !user?.email) {
       disconnect();
+      return;
     }
 
-    disconnect();
+    connect();
+
+    return () => {
+      disconnect();
+    };
   }, [token, user?.email]);
 
   // recebe eventos do WebSocket
@@ -48,24 +50,15 @@ export function useNotifications() {
 
     switch (lastEvent.type) {
       case "tasks.created":
-        console.log(lastEvent);
+        // console.log(lastEvent);
         roadToTask("Nova tarefa criada!", "Verificar", lastEvent);
         break;
       case "tasks.updated":
-        console.log(lastEvent);
-        toast("Tarefa atualizada!", {
-          action: {
-            label: "Verificar",
-            onClick: () =>
-              router.navigate({
-                to: "/tasks/$id",
-                params: { id: lastEvent.payload.taskId },
-              }),
-          },
-        });
+        // console.log(lastEvent);
+        roadToTask("Nova tarefa criada!", "Verificar", lastEvent);
         break;
       case "comment.new":
-        console.log("Comentario criado", lastEvent);
+        // console.log("Comentario criado", lastEvent);
         toast("Novo comentário criado!", {
           action: {
             label: "Verificar",
