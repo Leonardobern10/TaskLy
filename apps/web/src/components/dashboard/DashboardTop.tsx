@@ -1,3 +1,4 @@
+import { useWindowWidth } from "@/hooks/useWindowWidth";
 import TasksStatus from "../tasksStatus/TasksStatus";
 import TodayCalendar from "./TodayCalendar";
 
@@ -7,12 +8,13 @@ const styles = {
 };
 
 export default function DashboardTop() {
+  const width = useWindowWidth();
   return (
     <section className={styles.container}>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <TasksStatus />
       </div>
-      <TodayCalendar />
+      {width > 768 && <TodayCalendar />}
     </section>
   );
 }

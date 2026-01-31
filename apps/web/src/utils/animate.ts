@@ -28,3 +28,11 @@ export const optionsAnimate = {
     },
   },
 };
+
+export const optionsAnimateDashboardTop = (initial: number) => ({
+  initial: { x: initial },
+  animate: { x: 0 },
+  transition: {
+    duration: 1,
+  },
+});

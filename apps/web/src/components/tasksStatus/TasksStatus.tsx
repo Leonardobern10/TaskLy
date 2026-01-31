@@ -1,7 +1,8 @@
 import type { StatusType } from "@/types/StatusType";
-import AllProgress from "./AllProgress";
 import TodayProgress from "./TodayProgress";
 import { useDashboard } from "@/hooks/useDashboard";
+import { optionsAnimateDashboardTop } from "@/utils/animate";
+import { motion } from "motion/react";
 
 const buildTasksStatus = (
   tarefaCadastrada?: number,
@@ -9,25 +10,30 @@ const buildTasksStatus = (
   tarefaNaoConcluida?: number,
   tarefasAtrasadas?: number,
 ): StatusType[] => [
-  { statusName: "Tarefas cadastradas", statusValue: tarefaCadastrada || 0 },
-  { statusName: "Tarefas concluidas", statusValue: tarefaConcluida || 0 },
+  { statusName: "Cadastradas", statusValue: tarefaCadastrada ?? 0 },
+  { statusName: "Concluidas", statusValue: tarefaConcluida ?? 0 },
   {
-    statusName: "Tarefas não concluídas",
-    statusValue: tarefaNaoConcluida || 0,
+    statusName: "Não concluídas",
+    statusValue: tarefaNaoConcluida ?? 0,
   },
-  { statusName: "Tarefas atrasadas", statusValue: tarefasAtrasadas || 0 },
+  { statusName: "Atrasadas", statusValue: tarefasAtrasadas ?? 0 },
 ];
+
+const currentProgress = (total: number = 0, done: number = 0) =>
+  total > 0 ? (done / total) * 100 : 0;
 
 export default function TasksStatus() {
   const { tasksStatus } = useDashboard();
-  const total = tasksStatus?.tasksToday ?? 0;
-  const done = tasksStatus?.tasksTodayDone ?? 0;
-  const currentProgress = total > 0 ? (done / total) * 100 : 0;
+  const total = tasksStatus?.tasksToday;
+  const done = tasksStatus?.tasksTodayDone;
 
   return (
-    <div className="flex flex-col w-full gap-y-8">
+    <motion.div
+      className="flex flex-col w-full gap-y-8"
+      {...optionsAnimateDashboardTop(-600)}
+    >
       <TodayProgress
-        currentProgress={currentProgress}
+        currentProgress={currentProgress(total, done)}
         status={buildTasksStatus(
           tasksStatus?.tasksToday,
           tasksStatus?.tasksTodayDone,
@@ -46,6 +52,6 @@ export default function TasksStatus() {
         )}
       />
        */}
-    </div>
+    </motion.div>
   );
 }

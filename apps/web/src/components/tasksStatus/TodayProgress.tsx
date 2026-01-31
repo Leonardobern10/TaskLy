@@ -13,7 +13,7 @@ export default function TodayProgress({
 }: TodayProgressProps) {
   return (
     <div className="font-sans background-nice flex flex-col w-full gap-y-8 py-8 font-semibold border-2 px-10 rounded-2xl">
-      <div className="flex flex-row py-4 items-center justify-between px-4">
+      <div className="flex flex-row py-4 items-center justify-between md:px-4">
         <ProgressWithLabel
           label="Progresso do dia"
           progressValue={currentProgress}
