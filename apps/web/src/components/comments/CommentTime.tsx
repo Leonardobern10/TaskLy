@@ -7,9 +7,10 @@ type CommentTimeProps = {
 };
 
 export default function CommentTime({ createdAt }: CommentTimeProps) {
+  const renderDate = new Date(createdAt).toLocaleDateString("pt-BR");
   return (
     <p className={styles.commentTimeText}>
-      Criado em: <span>{new Date(createdAt).toLocaleDateString("pt-BR")}</span>
+      Criado em: <span>{renderDate}</span>
     </p>
   );
 }

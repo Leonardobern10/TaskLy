@@ -1,4 +1,4 @@
-const style = {
+const styles = {
   containerCommentText: "text-sm",
 };
 
@@ -8,7 +8,7 @@ type CommentTextProps = {
 
 export default function CommentText({ text }: CommentTextProps) {
   return (
-    <p className={style.containerCommentText}>
+    <p className={styles.containerCommentText}>
       <em>"{text}"</em>
     </p>
   );

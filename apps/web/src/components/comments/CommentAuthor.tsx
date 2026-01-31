@@ -7,9 +7,5 @@ type CommentAuthorProps = {
 };
 
 export default function CommentAuthor({ author }: CommentAuthorProps) {
-  return (
-    <p>
-      <span className={styles.commentAuthorContainer}>{author}</span>
-    </p>
-  );
+  return <p className={styles.commentAuthorContainer}>{author}</p>;
 }

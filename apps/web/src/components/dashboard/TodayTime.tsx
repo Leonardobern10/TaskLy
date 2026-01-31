@@ -1,5 +1,4 @@
 import { useDashboard } from "@/hooks/useDashboard";
-import Clock from "./Clock";
 import { motion } from "motion/react";
 
 const styles = {

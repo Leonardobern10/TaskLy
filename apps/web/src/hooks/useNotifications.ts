@@ -54,21 +54,10 @@ export function useNotifications() {
         roadToTask("Nova tarefa criada!", "Verificar", lastEvent);
         break;
       case "tasks.updated":
-        // console.log(lastEvent);
-        roadToTask("Nova tarefa criada!", "Verificar", lastEvent);
+        roadToTask("Tarefa atualizada!", "Verificar", lastEvent);
         break;
       case "comment.new":
-        // console.log("Comentario criado", lastEvent);
-        toast("Novo comentário criado!", {
-          action: {
-            label: "Verificar",
-            onClick: () =>
-              router.navigate({
-                to: "/tasks/$id",
-                params: { id: lastEvent.payload.taskId },
-              }),
-          },
-        });
+        roadToTask("Novo comentário criado!", "Verificar", lastEvent);
         break;
     }
   }, [lastEvent]);

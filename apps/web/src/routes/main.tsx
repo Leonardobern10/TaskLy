@@ -13,11 +13,7 @@ import { TasksIndexRoute } from "./tasks/index.redirect";
 const routeTree = RootRoute.addChildren([
   HomeRoute,
 
-  TaskRoute.addChildren([
-    TasksIndexRoute,
-    TaskDetailsRoute,
-    TasksDashboardRoute,
-  ]),
+  TaskRoute.addChildren([TaskDetailsRoute, TasksDashboardRoute]),
 
   NotFoundRoute,
 

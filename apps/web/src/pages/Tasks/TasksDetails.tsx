@@ -6,7 +6,7 @@ import { errorsMsg } from "@/errors/errors.message";
 import { ALERTS } from "@/utils/alerts";
 
 const styles = {
-  container: "w-full flex justify-center py-8 px-4 bg-muted/40",
+  container: "w-full flex justify-center py-8 px-4",
   content: "w-full max-w-4xl",
   p: "text-muted-foreground text-center",
 };

@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 const style = {
   header:
-    "w-full flex justify-between items-center px-6 md:px-25 py-4 bg-background/80 border-b",
+    "w-full h-fit flex justify-between items-center px-6 md:px-25 py-4 bg-background/80 border-b",
 };
 
 const headerOptions = {

@@ -21,6 +21,17 @@ type DashboardBodyProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
+const inputProps = (
+  searchTitle: string,
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+) => ({
+  type: dataComponent.inputType,
+  placeholder: dataComponent.inputPlaceholder,
+  className: styles.input,
+  value: searchTitle,
+  onChange: onChange,
+});
+
 export default function DashboardBody({
   searchTitle,
   onChange,
@@ -29,13 +40,7 @@ export default function DashboardBody({
     <section className={styles.dashboardContainer}>
       <div className={styles.dashboardContent}>
         <Search className={styles.search} />
-        <Input
-          type={dataComponent.inputType}
-          placeholder={dataComponent.inputPlaceholder}
-          className={styles.input}
-          value={searchTitle}
-          onChange={onChange}
-        />
+        <Input {...inputProps(searchTitle, onChange)} />
       </div>
     </section>
   );
