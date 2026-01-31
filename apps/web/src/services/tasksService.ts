@@ -49,6 +49,5 @@ export const updateTask = async (id: string, data: UpdateTaskSchemaType) => {
 
 export const getTasksStatus = async (): Promise<StatusTaskResponse> => {
   const response = await api.get("/tasks/taskStatus");
-  console.log(response.data);
   return response.data;
 };

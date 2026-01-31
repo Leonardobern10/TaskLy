@@ -52,7 +52,6 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
     set({ loading: true });
     const data: TaskItem | null = await fetchTaskById(id);
     set({ taskById: data, loading: false, comments: data?.comments ?? [] });
-    console.log(get().comments);
   },
 
   clearFilters: () => {

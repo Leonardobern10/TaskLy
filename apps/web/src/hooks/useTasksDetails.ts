@@ -15,7 +15,7 @@ export const useTasksDetails = (id: string) => {
       await fetchTaskById(id);
     };
     getTask();
-  }, [id, comments, taskById]);
+  }, [id]);
 
   return { taskById, loading, color, comments };
 };
