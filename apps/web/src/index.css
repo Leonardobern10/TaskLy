@@ -182,6 +182,10 @@
     @apply w-full max-w-md shadow-sm rounded-xl p-8 border;
   }
 
+  .label-title {
+    @apply text-sm md:text-lg font-medium;
+  }
+
   /* Skeleton */
   .skeleton-item {
     @apply w-1/4 h-5 mt-2;

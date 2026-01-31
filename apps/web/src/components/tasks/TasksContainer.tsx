@@ -15,7 +15,7 @@ const styles = {
   container: "w-full h-full flex flex-col shadow-sm rounded-xl",
   containerPagination: "py-4 px-4",
   card: "w-full",
-  cardContent: "flex-1 w-full py-6 px-4",
+  cardContent: "flex-1 w-full py-6 md:px-4",
   separator: "my-2 w-full bg-neutral-500/20 h-0.5",
   notFoundMsg: "flex justify-center items-center h-40 text-muted-foreground",
 };

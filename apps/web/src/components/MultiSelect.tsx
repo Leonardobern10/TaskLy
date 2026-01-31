@@ -27,17 +27,19 @@ export function MultiSelect({
   placeholder,
 }: MultiSelectProps) {
   const styles = {
-    button: "w-full justify-between",
+    button: "w-full justify-between border border-blue-500",
     chevrons: "w-4 h-4 opacity-50",
     popoverContent: "p-0 w-75",
     options: (value: string[], opt: Option) =>
       cn(
-        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
+        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-neutral-500",
         value.includes(opt.value)
-          ? "bg-primary text-primary-foreground"
-          : "opacity-50"
+          ? "bg-primary text-primary-foreground font-sans"
+          : "opacity-50",
       ),
-    check: "h-3 w-3",
+    check: "h-4 w-4",
+    label: (checked: boolean) =>
+      `font-sans leading-2 ${checked ? "text-neutral-800 font-medium" : "text-neutral-500"}`,
   };
 
   const selected =
@@ -69,7 +71,9 @@ export function MultiSelect({
                       <Check className={styles.check} />
                     )}
                   </div>
-                  {opt.label}
+                  <p className={styles.label(value.includes(opt.value))}>
+                    {opt.label}
+                  </p>
                 </CommandItem>
               ))}
             </CommandGroup>

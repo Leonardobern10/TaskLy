@@ -11,7 +11,7 @@ type ControllerMultiSelectProps = {
 
 const styles = {
   div: "flex flex-col gap-1",
-  label: "text-sm",
+  label: "label-title",
 };
 
 export function ControllerMultiSelect({

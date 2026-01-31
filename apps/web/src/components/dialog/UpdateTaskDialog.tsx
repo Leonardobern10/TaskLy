@@ -50,7 +50,9 @@ export default function UpdateTaskDialog({ task }: UpdateTaskDialogProps) {
       </DialogTrigger>
       <DialogContent className={styles.dialogContent}>
         <DialogHeader>
-          <DialogTitle>{updateTaskDialogData.dialogTitle}</DialogTitle>
+          <DialogTitle className="text-2xl font-medium">
+            {updateTaskDialogData.dialogTitle}
+          </DialogTitle>
           <DialogDescription>
             {updateTaskDialogData.dialogDescription}
           </DialogDescription>
@@ -84,30 +86,32 @@ export default function UpdateTaskDialog({ task }: UpdateTaskDialogProps) {
               />
             }
           />
-          <ContainerInputDialog
-            children={
-              <ControllerSelect<PriorityTaskType>
-                name="priority"
-                control={control}
-                label={dialogTexts.priority.label}
-                placeholder={dialogTexts.priority.placeholder}
-                values={selectPriorityData}
-                error={errors.priority}
-              />
-            }
-          />
-          <ContainerInputDialog
-            children={
-              <ControllerSelect<StatusTaskType>
-                name="status"
-                control={control}
-                label={dialogTexts.status.label}
-                placeholder={dialogTexts.status.placeholder}
-                values={selectStatusValues}
-                error={errors.status}
-              />
-            }
-          />
+          <div className="flex flex-row md:flex-col justify-start md:justify-between gap-x-12 md:gap-4 ">
+            <ContainerInputDialog
+              children={
+                <ControllerSelect<PriorityTaskType>
+                  name="priority"
+                  control={control}
+                  label={dialogTexts.priority.label}
+                  placeholder={dialogTexts.priority.placeholder}
+                  values={selectPriorityData}
+                  error={errors.priority}
+                />
+              }
+            />
+            <ContainerInputDialog
+              children={
+                <ControllerSelect<StatusTaskType>
+                  name="status"
+                  control={control}
+                  label={dialogTexts.status.label}
+                  placeholder={dialogTexts.status.placeholder}
+                  values={selectStatusValues}
+                  error={errors.status}
+                />
+              }
+            />
+          </div>
           <ContainerInputDialog
             children={
               <ControllerMultiSelect

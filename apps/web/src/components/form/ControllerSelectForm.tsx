@@ -5,7 +5,7 @@ import TextError from "../TextError";
 
 const styles = {
   div: "flex flex-col gap-1",
-  label: "text-sm",
+  label: "text-sm md:text-lg font-medium text-neutral-800",
 };
 
 export function ControllerSelect<T>({

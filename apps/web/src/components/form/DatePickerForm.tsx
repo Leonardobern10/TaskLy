@@ -11,8 +11,8 @@ import type { DatePickerProps } from "@/types/props/DatePickerProps";
 import { useState } from "react";
 
 const styles = {
-  div: "flex flex-col gap-3",
-  label: "px-1",
+  div: "flex flex-col gap-1",
+  label: "text-sm md:text-lg font-medium", // classe css -> label-title
   button: "w-48 justify-between font-normal cursor-pointer",
   popoverContent: "w-auto overflow-hidden p-0",
 };
