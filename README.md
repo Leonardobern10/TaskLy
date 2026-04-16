@@ -200,7 +200,7 @@ GET http://localhost:3000/api/docs
 
 ## Development Notes
 
-This project was built in 14 days, from architectural planning to final documentation. Day 1 was spent on architecture decisions and domain mapping — before writing a single line of code.
+This project was built in 28 days, from architectural planning to final documentation. Day 1 was spent on architecture decisions and domain mapping — before writing a single line of code.
 
 Ongoing improvements are tracked in the `updates` branch.
 
